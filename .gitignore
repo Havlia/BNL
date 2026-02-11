@@ -6,6 +6,11 @@ __pycache__/
 # C extensions
 *.so
 
+# mappa
+ros_package/src/private
+ros_package/build
+ros_package/install
+
 # Distribution / packaging
 .Python
 build/
