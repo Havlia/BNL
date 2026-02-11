@@ -1,7 +1,0 @@
-<<<<<<< Updated upstream
-=======
-[submodule "ros_root/package/ldlidar_ros2_ws/src"]
-	path = ros_root/package/ldlidar_ros2_ws/src
-	url = https://github.com/ldrobotSensorTeam/ldlidar_ros2
-
->>>>>>> Stashed changes
