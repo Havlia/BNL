@@ -27,8 +27,8 @@ Docker i vårt tilfelle har 3 prosesser i seg
 *Bygg et image.
 *Kjør det image'e.
 
-# Modifiser image'e
-Først, så må eventuelle endringa gjøres. For å få mest stabil og elementær funksjonalitet, la den vær default. Derimot, hvis du ska teste dine egne funksjone så må du kun endre på `Dockerfile` fila som ligg i `custom_docker`. **IKKE ENDRE PÅ `Dockerfile` I `docker_image` MAPPA**. For å faktisk få den til å hent fra dine egne endringa, så må du endre korr image hente filan fra. I Det her e i linje 96 i `private_docker/Dockerfile`:
+### Modifiser image'e
+Først, så må eventuelle endringa gjøres. For å få mest stabil og elementær funksjonalitet, la den vær default. Derimot, hvis du ska teste dine egne funksjone så må du kun endre på `Dockerfile` fila som ligg i `custom_docker`. **IKKE ENDRE PÅ** `Dockerfile` **I** `docker_image` **MAPPA**. For å faktisk få den til å hent fra dine egne endringa, så må du endre korr image hente filan fra. I Det her e i `linje 96` i `private_docker/Dockerfile`:
 
 ```python
 RUN git clone --recursive "https://github.com/Havlia/BNL" /bnl_git
@@ -40,7 +40,7 @@ Bytt linken ut med linken til din fork, i.e.:
 RUN git clone --recursive "https://github.com/dinbruker/BNL" /bnl_git
 ```
 
-Om du mangle visse libraries, og vil ikke last ned dem hver gang, så kan dem legges til i packages nedlastinga på linje 11 i docker fila:
+Om du mangle visse libraries, og vil ikke last ned dem hver gang, så kan dem legges til i packages nedlastinga på `linje 11` i docker fila:
 
 ```python
 RUN apt-get update && apt-get install -q -y --no-install-recommends \
@@ -69,7 +69,7 @@ Det er bare ryddigere.
 
 Så om du trenger flere pakker, så bare legger du den til i lista.
 
-# Bygg Docker Image
+### Bygg Docker Image
 Deretter så må Docker-imageé bygges. Kjør kommandoen:
 
 ```console
@@ -78,18 +78,18 @@ sudo docker build --tag bnl:ros-image "docker_image"
 
 * `docker build` er kommandoen for å bygge et image.
 * `--tag` er terminal flagget som lar deg gi image'e et slags navn.
-* `bnl:ros-image` er Docker sin egen navnekonvensjon. Helst opretthold denne til en viss grad. se [Docker * sin dokumentasjon](https://docs.docker.com/get-started/docker-concepts/building-images/build-tag-and-publish-an-image/#tagging-images).
+* `bnl:ros-image` er Docker sin egen navnekonvensjon. Helst opretthold denne til en viss grad. se [Docker sin dokumentasjon](https://docs.docker.com/get-started/docker-concepts/building-images/build-tag-and-publish-an-image/#tagging-images).
 * `docker_image` e mappe navnet. Hvis du ska bruk din skreddersydde versjon, så må du bytt ut herren med `private_docker`. Hermetegnene `" "` er bare for å unngå problemer med eventuell mellomrom i navn.
 
-> Dette kommer til å ta en stund første gangen (~4-5 min), men dere kan fint gjøre andre ting i mens denne jobber.
+> Bygginga kommer til å ta en stund første gangen (~4-5 min), men dere kan fint gjøre andre ting i mens denne jobber.
 
 Den vil gi noen varsla på slutten, men vil ikke vær problematisk hvis du ser herre:
 
 ```console
- => => unpacking to docker.io/library/bnl:ros2-
- ..
- ..
- gui                                                                        31.3s
+..
+..
+ => => unpacking to docker.io/library/bnl:ros2-gui
+                                                                         31.3s
 
  4 warnings found (use docker --debug to expand):
  - LegacyKeyValueFormat: "ENV key=value" should be used instead of legacy "ENV key value" format (line 51)
@@ -101,11 +101,11 @@ Den vil gi noen varsla på slutten, men vil ikke vær problematisk hvis du ser h
 
 > Note: Docker image'e du har bygget er lokalisert på pcen din i en spesifik mappe. Du trenger ikke fiske den fram selv, ettersom docker vet hvor den lagrer disse.
 
-# Kjør Docker fil
+### Kjør Docker fil
 
 No ska du kjør Docker konteinern, og det kan gjøres på 2 måta, basert på ka du treng.
 
-* **Uten GUI (Default)**
+#### Uten GUI (Default)
 
 Dersom du skal kun kjøre funksjoner og kommunikasjon uten noen former for gui elementer (i.e. ikke gazebo, rviz2, rqt, rqt-graph, plotjuggler o.l.) så kan du starte den på vanlig vis.
 
@@ -134,11 +134,11 @@ root@f38ad4e50fa7:/bnl_git#
 Gratulerer! Du har nå åpnet en Docker konteiner. Ros er lokalisert på samme sted som på linux, og du er nå i root av Git'en.
 
 * Ros-lokasjon: `/opt/ros/jazzy/`
-* Git-lokasjon: `/bnl_git/
+* Git-lokasjon: `/bnl_git/`
+\
+#### Kjør Docker fil med Rocker (GUI)
 
-# Kjør Docker fil med Rocker (GUI)
-
-Rocker er en wrapper på Docker, som lar deg kjøre med gpu akselerasjon og mange andre ting, men viktigst er x11, som lar oss loade GUI.
+Rocker er en wrapper på Docker, som lar deg kjøre med gpu akselerasjon og mange andre ting, men viktigst er `x11`, som lar oss loade GUI.
 
 Start med å laste ned Rocker:
 
@@ -173,11 +173,11 @@ root@2f35155ec1cc:/bnl_git#
 Gratulerer! Du har startet en GUI variant av Docker. Ros er lokalisert på samme sted som på linux, og du er nå i root av Git'en.
 
 * Ros-lokasjon: `/opt/ros/jazzy/`
-* Git-lokasjon: `/bnl_git/
+* Git-lokasjon: `/bnl_git/`
 
 
 # For å avslutte Docker.
 
-Ettersom `Ctrl+C` brukes for å avslutte terminal prosesser, så brukes `Ctrl+D`for å avslutte docker prosessen. Da går du tilbake til en vanlig terminal, og alt du jobbet med er slettet.
+Ettersom `Ctrl+C` brukes for å avslutte terminal prosesser, så bruke docker `Ctrl+D`for å avslutte konteinern. Da går du tilbake til en vanlig terminal, og alt du jobbet med er slettet.
 
 **HUSK: DET LAGRES IKKE AV SÆ SJØL!!!**
