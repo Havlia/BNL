@@ -31,6 +31,7 @@ RUN apt-get update && apt-get install -q -y --no-install-recommends \
     python3-pytest-rerunfailures \
     python3-pytest-runner \
     python3-pytest-timeout \
+    build-essential g++ libc6-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # setup keys
@@ -87,18 +88,14 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu noble universe" >> /etc/apt/sourc
 #COPY ./ros2.sources /etc/apt/sources.list.d/
 ENV ROS_DISTRO jazzy
 
-RUN apt install -y ros-dev-tools && apt update \
-    && apt upgrade -y && sudo apt install -y ros-${ROS_DISTRO}-desktop
+RUN apt install -y ros-dev-tools && apt update
+RUN apt upgrade -y 
+RUN apt install -y ros-${ROS_DISTRO}-desktop
 
 RUN git config --global user.name "Docker Image User" 
 RUN git clone --recursive "https://github.com/Havlia/BNL" /bnl_git
 
 ENV BNL_WS /bnl_git
-
-# clone source
-ENV ROS2_WS /opt/ros2_ws
-RUN mkdir -p $ROS2_WS/src
-WORKDIR $ROS2_WS
 
 WORKDIR $BNL_WS
 

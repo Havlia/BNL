@@ -1,0 +1,1 @@
+/home/lillehavard/Desktop/BNL/src/ros2_packages/ldlidar_ros2_ws/build/ldlidar_ros2/ament_cmake_core/ldlidar_ros2Config-version.cmake

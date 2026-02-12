@@ -1,0 +1,1 @@
+/home/lillehavard/Desktop/BNL/src/ros2_packages/ldlidar_ros2_ws/src/scripts/create_udev_rules.sh
