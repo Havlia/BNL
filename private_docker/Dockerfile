@@ -93,7 +93,7 @@ RUN apt upgrade -y
 RUN apt install -y ros-${ROS_DISTRO}-desktop
 
 RUN git config --global user.name "Docker Image User" 
-RUN git clone --recursive "https://github.com/Havlia/BNL" /bnl_git
+RUN git clone --recursive --branch docker-image --single-branch "https://github.com/Havlia/BNL" /bnl_git
 
 ENV BNL_WS /bnl_git
 
