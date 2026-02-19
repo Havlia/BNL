@@ -1,6 +1,3 @@
-[submodule "src/ros2_packages/src/ros2/packages"]
-	path = src/ros2_packages/src/ros2/packages
-	url = https://github.com/SteveMacenski/slam_toolbox
 [submodule "src/ros2_packages/slam_toolbox"]
 	path = src/ros2_packages/slam_toolbox
 	url = https://github.com/SteveMacenski/slam_toolbox
