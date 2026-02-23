@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="my_robot">
+
+  <xacro:include filename="macros/macros_includes.xacro"/>
+
+  <!--> Base Vehicle </!-->
+  <xacro:include filename="vehicle_bases/chassis_base.xacro"/>
+  <xacro:include filename="vehicle_bases/wheel_base.xacro"/>
+  
+  <!--> Components </!-->
+  <xacro:include filename="component_bases/lidar_base.xacro"/>
+
+
+  <!--> Control units </!-->
+  <!-->
+  <xacro:include filename="../gazebo_control.xacro"/>
+  </!-->
+</robot>

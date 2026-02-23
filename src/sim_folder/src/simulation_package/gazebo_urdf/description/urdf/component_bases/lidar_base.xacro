@@ -1,0 +1,29 @@
+<?xml version = "1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="my_robot">
+
+    <link name="lidar">
+        <visual>
+            <!-- Løft boksen litt opp slik at rotasjon skjer i bunn av boksen. -->
+            <origin xyz="0 0 0.0125" rpy="0 0 0"/>
+            <geometry>
+                <!-- Skalert kopi av kropp-boksen (0.2 0.3 0.1) i 1/4 størrelse. -->
+                <box size="0.05 0.075 0.025"/>
+            </geometry>
+            <material name="orange"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0.0125" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.05 0.075 0.025"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_box mass="0.1" x="0.05" y="0.075" z="0.025">
+            <origin xyz="0 0 0.0125" rpy="0 0 0"/>
+        </xacro:inertial_box>
+    </link>
+
+    <gazebo reference="lidar">
+        <material>Gazebo/Orange</material>
+    </gazebo>
+
+</robot>
