@@ -1,7 +1,16 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="my_robot">
 
+    <link name="footbase_link"/>
+
     <link name="base_link"/>
+
+        <!-- Fixed joint with offset -->
+    <joint name="base_to_offset" type="fixed">
+        <parent link="footbase_link"/>
+        <child link="base_link"/>
+        <origin xyz="0.0 0.0 0.85" rpy="0 0 0"/>  <!-- This is the offset: 10cm forward, 20cm up -->
+    </joint>
 
     <joint name="kropp_joint" type="fixed">
         <parent link="base_link"/>

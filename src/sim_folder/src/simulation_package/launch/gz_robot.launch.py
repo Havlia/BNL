@@ -27,7 +27,7 @@ def generate_launch_description():
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(gz_launch_path),
             launch_arguments={
-                'gz_args': PathJoinSubstitution([sim_pkg_path, 'gazebo_includes', 'worlds/robot3.sdf']),
+                'gz_args': PathJoinSubstitution([sim_pkg_path, 'gazebo_includes', 'worlds/robot_world.sdf']),
                 'on_exit_shutdown': 'True'
             }.items(),
         ),

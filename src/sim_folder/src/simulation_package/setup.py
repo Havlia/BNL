@@ -15,6 +15,7 @@ setup(
         ('share/' + package_name + '/gazebo_includes/models', glob('gazebo_includes/models/**/*', recursive=True)),
         ('share/' + package_name + '/gazebo_includes/plugins', glob('gazebo_includes/plugins/**/*', recursive=True)),
         ('share/' + package_name + '/gazebo_includes/worlds', glob('gazebo_includes/worlds/**/*', recursive=True)),
+        #('share/' + package_name + '/environment', ['scripts/env_hook.sh']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
