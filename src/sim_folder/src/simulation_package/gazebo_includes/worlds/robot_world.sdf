@@ -305,6 +305,8 @@
         </camera_clip>
       </plugin>
 
+
+
       <!-- Provides mouse and keyboard interaction -->
       <plugin filename="GzSceneManager" name="Scene Manager">
         <gz-gui>

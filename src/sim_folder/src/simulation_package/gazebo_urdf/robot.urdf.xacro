@@ -10,6 +10,16 @@
   <!--> Components </!-->
   <xacro:include filename="component_bases/lidar_base.xacro"/>
 
+  <plugin
+    filename="gz-sim-diff-drive-system"
+    name="gz::sim::systems::DiffDrive">
+    <left_joint>venstre_hjul_joint</left_joint>
+    <right_joint>høyre_hjul_joint</right_joint>
+    <wheel_separation>0.205</wheel_separation>
+    <wheel_radius>0.035</wheel_radius>
+    <odom_publish_frequency>1</odom_publish_frequency>
+    <topic>cmd_vel</topic>
+  </plugin>
 
   <!--> Control units </!-->
   <!-->

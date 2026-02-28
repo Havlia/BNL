@@ -9,7 +9,7 @@
     <joint name="base_to_offset" type="fixed">
         <parent link="footbase_link"/>
         <child link="base_link"/>
-        <origin xyz="0.0 0.0 0.85" rpy="0 0 0"/>  <!-- This is the offset: 10cm forward, 20cm up -->
+        <origin xyz="0.0 0.0 0.085" rpy="0 0 0"/>  <!-- This is the offset: 10cm forward, 20cm up -->
     </joint>
 
     <joint name="kropp_joint" type="fixed">
