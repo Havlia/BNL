@@ -18,7 +18,7 @@ def generate_launch_description():
 
 
     startup_node = Node(
-        package='yolact_package',
+        package='yolo_package',
         executable='bnl_startup.sh',
         name='BNL_startup',
         output='screen',
@@ -36,11 +36,18 @@ def generate_launch_description():
     )
     
     wrapper_node = Node(
-        package='yolact_package',
-        executable='env_wrapper.sh',
-        name='ros_yolact_node',
+        package='yolo_package',
+        executable='yolo_wrapper.sh',
+        name='ros_yolo_node',
         output='screen'
 
+    )
+
+    hack_node_gz_topic_list = Node(
+        package='yolo_package',
+        executable='HACK_run_topic_list.sh',
+        name='hacky_node_gz',
+        output='screen'
     )
 
     gz_start_node = IncludeLaunchDescription(
@@ -51,6 +58,12 @@ def generate_launch_description():
         }.items()
     )
 
+    wait_sec_node = TimerAction(period=2.0,
+                                actions=[   gz_start_node,
+                                            #hack_node_gz_topic_list,
+                                            bridge_node,
+                                            wrapper_node])
+
     return LaunchDescription([
         SetEnvironmentVariable(
             'GZ_SIM_RESOURCE_PATH',
@@ -59,18 +72,13 @@ def generate_launch_description():
         SetEnvironmentVariable(
             'BNL_VENV_PATH',os.path.expanduser('~/.BNL_venv/.venv') 
         ),
-        SetEnvironmentVariable(
-            'CUDA_VISIBLE_DEVICES',""
-        ),
 
         startup_node,
 
         RegisterEventHandler(
             OnProcessExit(
                 target_action=startup_node,
-                on_exit=[gz_start_node,
-                         bridge_node,
-                         wrapper_node]
+                on_exit=[wait_sec_node]
             )
         )
     ])

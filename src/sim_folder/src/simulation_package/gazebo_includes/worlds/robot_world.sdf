@@ -29,6 +29,8 @@
       <render_engine>ogre2</render_engine>
     </plugin>
 
+
+
     <!-- Contact plugin -->
     <plugin filename="gz-sim-contact-system" name="gz::sim::systems::Contact"/>
 
@@ -315,6 +317,13 @@
         </gz-gui>
       </plugin>
 
+      <plugin filename="GzVisualizeLidar" name="Visualize Lidar">
+        <gz-gui>
+          <topic>scan_gpu</topic>
+          <enabled>true</enabled>
+        </gz-gui>
+      </plugin>
+      
       <plugin filename="InteractiveViewControl" name="Interactive View Control">
         <gz-gui>
           <property type="bool" key="showTitleBar">false</property>
