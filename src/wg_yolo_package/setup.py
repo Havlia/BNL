@@ -1,7 +1,6 @@
 from setuptools import find_packages, setup
-from glob import glob
 
-package_name = 'simulation_package'
+package_name = 'wg_yolo_package'
 
 setup(
     name=package_name,
@@ -11,9 +10,8 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name + '/gazebo_includes/models', glob('gazebo_includes/models/**/*', recursive=True)),
-        ('share/' + package_name + '/gazebo_includes/plugins', glob('gazebo_includes/plugins/**/*', recursive=True)),
-        ('share/' + package_name + '/gazebo_includes/worlds', glob('gazebo_includes/worlds/**/*', recursive=True)),
+        ('share/' + package_name + '/segmentation_model', ['ros_yolo_node/segmentation_model/yolo26n.pt']),
+        ('lib/' + package_name, ['yolo_wrapper.sh']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -30,4 +28,6 @@ setup(
         'console_scripts': [
         ],
     },
+
 )
+
