@@ -5,27 +5,25 @@ import os
 import numpy as np
 import math
 from sensor_msgs.msg import Image
-from data_utilities.qos_profiles import default_qos_profile
 from ament_index_python import get_package_prefix
-import cv2
-import datetime as dt
-from hashlib import sha256
+from RPi import GPIO
 
 
-class ros_picamera(Node):
+class imu_node_class(Node):
     def __init__(self):
-        super().__init__('picamera_node')
+        super().__init__('node_name')
         
-        self.get_logger().info(f"Kamera starta.")
+        self.get_logger().info(f"Node started")
         
 
 def main(args=None):
     rclpy.init(args=args)
-    picamera_N = ros_picamera()
-    rclpy.spin(picamera_N)
-    picamera_N.destroy_node()
+    imu_N = imu_node_class()
+    rclpy.spin(imu_N)
+    imu_N.destroy_node()
     rclpy.shutdown()
 
 if __name__ == "__main__":
     main()
+
 

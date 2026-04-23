@@ -48,8 +48,8 @@ RUN set -eux; \
 RUN echo "deb [ signed-by=/usr/share/keyrings/ros2-latest-archive-keyring.gpg ] http://packages.ros.org/ros2/ubuntu noble main" > /etc/apt/sources.list.d/ros2-latest.list
 
 # setup environment
-ENV LANG C.UTF-8
-ENV LC_ALL C.UTF-8
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
 
 # install bootstrap tools
 RUN apt-get update && apt-get install --no-install-recommends -y \
@@ -86,16 +86,16 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu noble universe" >> /etc/apt/sourc
 
 # Install ROS2
 #COPY ./ros2.sources /etc/apt/sources.list.d/
-ENV ROS_DISTRO jazzy
+ENV ROS_DISTRO=jazzy
 
 RUN apt install -y ros-dev-tools && apt update
 RUN apt upgrade -y 
 RUN apt install -y ros-${ROS_DISTRO}-desktop
 
 RUN git config --global user.name "Docker Image User" 
-RUN git clone --recursive --branch docker-image --single-branch "https://github.com/Havlia/BNL" /bnl_git
+RUN git clone --recursive "https://github.com/Havlia/BNL"
 
-ENV BNL_WS /bnl_git
+ENV BNL_WS=/BNL
 
 WORKDIR $BNL_WS
 
@@ -120,3 +120,5 @@ RUN apt-get update && apt-get upgrade -y
 
 ENTRYPOINT ["/ros_entrypoint.sh"]
 CMD ["bash"]
+
+
