@@ -8,5 +8,5 @@ cd BNL
 colcon build
 source install/setup.bash
 source install/local_setup.bash 
-ros2 launch wg_bringup wg.launch.py--
+ros2 launch wg_bringup wg.launch.py mode:=real --
 exec "$@"

@@ -36,12 +36,6 @@ RUN apt-get update && apt-get install -q -y --no-install-recommends \
     build-essential g++ libc6-dev \
     && rm -rf /var/lib/apt/lists/*
 
-ENV BNL_VENV_PATH=/.BNL_venv/
-
-RUN wget -L https://raw.githubusercontent.com/Havlia/BNL/refs/heads/main/src/wg_bringup/bnl_startup.sh && chmod +x bnl_startup.sh
-RUN bnl_startup.sh
-RUN rm bnl_startup.sh  
-
 # setup keys
 RUN set -eux; \
        key='C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654'; \
@@ -102,6 +96,7 @@ RUN apt install -y ros-${ROS_DISTRO}-desktop
 RUN sudo apt-get install -y ros-${ROS_DISTRO}-ros-gz
 
 RUN git config --global user.name "Docker Image User" 
+ENV USER=DOCKER
 
 #RUN rosdep install --from-paths -y ${BNL_WS}/src/ros2_packages/ldlidar_ros2_ws/src && \ 
 #    rosdep install --from-paths -y ${BNL_WS}/src/ros2_packages/slam_toolbox
@@ -112,6 +107,12 @@ RUN git config --global user.name "Docker Image User"
 #    --cmake-args \
 #      -DSECURITY=ON --no-warn-unused-cli \
 #    --symlink-install
+
+ENV BNL_VENV_PATH=/home/${USER}/.BNL_venv/
+
+RUN wget https://raw.githubusercontent.com/Havlia/BNL/refs/heads/main/docker_image/docker_python_venv.bash && chmod +x docker_python_venv.bash
+RUN bash docker_python_venv.bash
+RUN rm docker_python_venv.bash
 
 
 # setup bashrc
