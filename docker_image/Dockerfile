@@ -113,7 +113,7 @@ ENV BNL_VENV_PATH=/home/${USER}/.BNL_venv/
 RUN wget https://raw.githubusercontent.com/Havlia/BNL/refs/heads/main/docker_image/docker_python_venv.bash && chmod +x docker_python_venv.bash
 RUN bash docker_python_venv.bash
 RUN rm docker_python_venv.bash
-
+RUN chmod u+w /root/.config/Ultralytics
 
 # setup bashrc
 RUN cp /etc/skel/.bashrc ~/

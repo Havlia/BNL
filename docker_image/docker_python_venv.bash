@@ -5,6 +5,7 @@ python3 -m "venv" "${BNL_VENV_PATH}/.venv" && source "${BNL_VENV_PATH}/.venv/bin
 						pillow \
 		 				nvidia-cudnn-cu11 \
 		 				matplotlib \
+		 				picamera2 \
 		 				PyQt5 \
 		 				PyYAML \
 		 				cocotools \

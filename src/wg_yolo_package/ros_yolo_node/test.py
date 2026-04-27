@@ -15,3 +15,4 @@ obj = one()
 print(obj.one == 1)
 
 print((0.5 if 1 == 0 else -0.5))
+

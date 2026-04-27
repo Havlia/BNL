@@ -30,7 +30,6 @@ class ros_yolo(Node):
         self.model_directory    = os.path.join(get_package_prefix('wg_yolo_package'), 'share', 'wg_yolo_package', 'segmentation_model')
         self.model_path         = os.path.join(self.model_directory, 'yolo26n.pt')
 
-        self.get_logger().info(f"{self.model_path}")
         self.image_index = 1
 
         self.event_buffer_time = 2        #   sekund
