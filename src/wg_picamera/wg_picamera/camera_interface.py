@@ -13,6 +13,7 @@ import datetime as dt
 from hashlib import sha256
 from time import sleep
 import subprocess as sp
+import threading
 
 
 class ros_picamera(Node):
@@ -22,31 +23,47 @@ class ros_picamera(Node):
         self.image_publisher = self.create_publisher(Image, 'camera_image', default_qos_profile)
         self.timer = self.create_timer(1/10, self.image_callback)
 
-        self.width = 1280
-        self.height = 720
+        self.width = 1920
+        self.height = 1080
 
         self.sub_command = ['rpicam-vid',
                             '-t', '0',
-                            '--nopreview',
+                            #'--nopreview',
                             f'--width={self.width}', f'--height={self.height}',
-                            '--codec', 'yuv420',
+                            '--mode', '1920:1080:8'
                             '-o', '-', 
                            ]
-        self.frame_size = int(self.width*self.height*1.5)   #   YUV greier med formatteringa.
+        self.frame_size = int(self.width*self.height)
 
         self.proc = sp.Popen(self.sub_command, stdout=sp.PIPE, bufsize=10**8)
-        #self.buff = b""
-            
-    def image_callback(self):
-        
-        raw_image = self.proc.stdout.read(self.frame_size)
+    
+        self.latest_frame = None
+        self.lock = threading.Lock()
 
-        if len(raw_image) < self.frame_size:
+        self.thread = threading.Thread(target=self.camera_loop, daemon=True)
+        self.thread.start()
+
+    def camera_loop(self):
+        while rclpy.ok():
+            raw_image = self.proc.stdout.read(self.frame_size)
+
+            if len(raw_image) != self.frame_size:
+                continue
+
+            with self.lock:
+                self.latest_frame = None
+
+    def image_callback(self):
+        with self.lock:
+            frame = self.latest_frame
+        
+
+        if frame is None:
             return
         
-        yuv_data = np.frombuffer(raw_image, dtype=np.uint8).reshape((self.height*3//2, self.width))
+        image_array = np.frombuffer(frame, dtype=np.uint8).reshape((self.width, self.height))
 
-        bgr_image = cv2.cvtColor(yuv_data, cv2.COLOR_YUV2BGR_I420)
+        bgr_image = cv2.cvtColor(image_array, cv2.COLOR_BAYER_BG2BGR)
 
         image_msg = cv_bridge.CvBridge.cv2_to_imgmsg(bgr_image)
         
