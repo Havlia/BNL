@@ -24,7 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'udp_server_exec = wg_udp_server.udp_client:main',
+            'udp_server_exec = wg_udp_server.udp_server:main',
             'udp_client_exec = wg_udp_client.udp_client:main'
         ],
     },
