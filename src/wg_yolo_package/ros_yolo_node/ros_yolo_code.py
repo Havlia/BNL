@@ -41,7 +41,6 @@ class ros_yolo(Node):
         self.create_subscription(Image, 'camera_image', self.image_callback, default_qos_profile)
 
         self.cv_bridge = cv_bridge.CvBridge()
-        
         self.latest_image           = None
         self.image_id               = None
         self.current_image_id       = None

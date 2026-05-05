@@ -18,11 +18,16 @@ def generate_launch_description():
     gz_launch_path = PathJoinSubstitution([ros_gz_sim_pkg_path, 'launch', 'gz_sim.launch.py'])
     
     mode = LaunchConfiguration('mode')
+    udp = LaunchConfiguration('udp')
 
     mode_arg = DeclareLaunchArgument('mode', 
                           default_value='sim',
                           description="Launch argument som bestemme om vi kjøre simulasjon eller ikke."
                           )
+    
+    udp_arg = DeclareLaunchArgument('udp',
+                                    default_value='server',
+                                    description="Velge om du e client eller server.")
 
 
     startup_node = Node(
@@ -76,12 +81,39 @@ def generate_launch_description():
         condition=IfCondition(PythonExpression(["'", mode, "' == 'real'"])),
     )
 
+    gui_node = Node(
+        package='wg_controller_gui',
+        executable='controller_gui_exec',
+        name='gui_node',
+        output='screen',
+        condition=IfCondition(PythonExpression(["'", mode, "' == 'real'"])),
+    )
+
+    udp_server_node = Node(
+        package='wg_udp_package',
+        executable='udp_server_exec',
+        name='udp_server',
+        output='screen',
+        condition=IfCondition(PythonExpression(["'", udp, "' == 'server'"])),
+    )
+
+    udp_client_node = Node(
+        package='wg_udp_package',
+        executable='udp_client_exec',
+        name='udp_client',
+        output='screen',
+        condition=IfCondition(PythonExpression(["'", udp, "' == 'client'"])),
+    )
+
     wait_sec_node = TimerAction(period=2.0,
                                 actions=[   gz_start_node,
                                             #hack_node_gz_topic_list,
                                             bridge_node,
                                             wrapper_node,
-                                            picamera_node])
+                                            #picamera_node,
+                                            udp_client_node,
+                                            udp_server_node,
+                                            gui_node])
 
     return LaunchDescription([
         SetEnvironmentVariable(
