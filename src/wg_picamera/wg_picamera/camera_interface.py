@@ -14,6 +14,7 @@ from hashlib import sha256
 from time import sleep
 import subprocess as sp
 import threading
+import gc
 
 
 class ros_picamera(Node):
@@ -21,37 +22,61 @@ class ros_picamera(Node):
         super().__init__('picamera_node')
 
         self.image_publisher = self.create_publisher(Image, 'camera_image', default_qos_profile)
-        self.timer = self.create_timer(1/10, self.image_callback)
+        self.timer = self.create_timer(1/5, self.image_callback)
 
-        self.width = 1920
-        self.height = 1080
+        self.width = 640
+        self.height = 480
 
-        self.sub_command = ['rpicam-vid',
+        self.sub_command = ['sudo', 'rpicam-vid',
                             '-t', '0',
                             #'--nopreview',
                             f'--width={self.width}', f'--height={self.height}',
-                            '--mode', '1920:1080:8'
+                            '--codec', 'mjpeg',
                             '-o', '-', 
                            ]
-        self.frame_size = int(self.width*self.height)
 
-        self.proc = sp.Popen(self.sub_command, stdout=sp.PIPE, bufsize=10**8)
-    
+        self.proc = sp.Popen(self.sub_command, stdout=sp.PIPE, bufsize=0)
+        self.buf = b""
+
         self.latest_frame = None
         self.lock = threading.Lock()
+
+        self.get_logger().info("Fakk u")
 
         self.thread = threading.Thread(target=self.camera_loop, daemon=True)
         self.thread.start()
 
     def camera_loop(self):
         while rclpy.ok():
-            raw_image = self.proc.stdout.read(self.frame_size)
+            gc.collect()
+            self.buf += self.proc.stdout.read(65536)
 
-            if len(raw_image) != self.frame_size:
-                continue
+            if len(self.buf) > 1_000_000:
+                self.buf = self.buf[-500_000:]
+
+            #   jpg sjit
+            start = self.buf.find(b'\xff\xd8')
+            end =   self.buf.find(b'\xff\xd9')
+
+            if start != -1 and end != -1 and end > start:
+
+                jpg = self.buf[start:end+2]
+                self.buf = self.buf[end+2:]
+
+                img = cv2.imdecode(np.frombuffer(jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
+
+                if img is not None:
+                    pass
+                    #print(img.shape)
+            else:
+                img = None
 
             with self.lock:
-                self.latest_frame = None
+                if img is not None:
+                    self.latest_frame = img
+
+        
+            
 
     def image_callback(self):
         with self.lock:
@@ -61,12 +86,19 @@ class ros_picamera(Node):
         if frame is None:
             return
         
-        image_array = np.frombuffer(frame, dtype=np.uint8).reshape((self.width, self.height))
+        #cv2.imwrite("/home/bnluser/BANAN.jpg", frame)
+        #self.get_logger().info("Mottar")
 
-        bgr_image = cv2.cvtColor(image_array, cv2.COLOR_BAYER_BG2BGR)
+        #self.get_logger().info(f"{len(frame.tobytes())}")
 
-        image_msg = cv_bridge.CvBridge.cv2_to_imgmsg(bgr_image)
-        
+        image_msg = Image()
+
+        image_msg.height = self.height
+        image_msg.width = self.width
+        image_msg.encoding = "bgr8"
+        image_msg.step = self.width * 3
+        image_msg.data = frame.tobytes()
+
         self.image_publisher.publish(image_msg)
 
 def main(args=None):

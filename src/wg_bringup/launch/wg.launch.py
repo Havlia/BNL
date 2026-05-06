@@ -123,6 +123,9 @@ def generate_launch_description():
         SetEnvironmentVariable(
             'BNL_VENV_PATH',os.path.expandvars('/home/${USER}/.BNL_venv/.venv') 
         ),
+        SetEnvironmentVariable(
+            'ROS_DOMAIN_ID','81'
+        ),
 
         mode_arg,
         startup_node,
