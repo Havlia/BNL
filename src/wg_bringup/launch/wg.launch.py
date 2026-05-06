@@ -72,6 +72,13 @@ def generate_launch_description():
         }.items(),
         condition=IfCondition(PythonExpression(["'", mode, "' == 'sim'"])),
     )
+    
+    pwm_node = Node(
+        package='wg_test_pwm',
+        executable='pwm_wrapper.sh',
+        name='pwm_node',
+        output='screen',
+    )
 
     picamera_node = Node(
         package='wg_picamera',
@@ -111,6 +118,7 @@ def generate_launch_description():
                                             bridge_node,
                                             wrapper_node,
                                             #picamera_node,
+                                            pwm_node,
                                             udp_client_node,
                                             udp_server_node,
                                             gui_node])
