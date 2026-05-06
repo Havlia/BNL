@@ -8,7 +8,6 @@ from sensor_msgs.msg import Image
 from data_utilities.qos_profiles import default_qos_profile
 from ament_index_python import get_package_prefix
 import cv2
-import cv_bridge
 import datetime as dt
 from hashlib import sha256
 from time import sleep
@@ -29,6 +28,7 @@ class ros_picamera(Node):
 
         self.sub_command = ['sudo', 'rpicam-vid',
                             '-t', '0',
+                            '--framerate','10',
                             #'--nopreview',
                             f'--width={self.width}', f'--height={self.height}',
                             '--codec', 'mjpeg',
@@ -67,17 +67,15 @@ class ros_picamera(Node):
 
                 if img is not None:
                     pass
-                    #print(img.shape)
+
             else:
                 img = None
 
             with self.lock:
                 if img is not None:
-                    self.latest_frame = img
+                    self.latest_frame = img 
 
-        
-            
-
+    
     def image_callback(self):
         with self.lock:
             frame = self.latest_frame
@@ -85,11 +83,6 @@ class ros_picamera(Node):
 
         if frame is None:
             return
-        
-        #cv2.imwrite("/home/bnluser/BANAN.jpg", frame)
-        #self.get_logger().info("Mottar")
-
-        #self.get_logger().info(f"{len(frame.tobytes())}")
 
         image_msg = Image()
 

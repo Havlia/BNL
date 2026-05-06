@@ -51,38 +51,12 @@ class ros_yolo(Node):
 
         self.model = YOLO(self.model_path)
         self.get_logger().info(f"Yolo startet.")
-        #self.get_logger().info(f"Classes:\n{self.model.names}")
 
 
     def image_callback(self, msg: Image):
         self.latest_image = msg
-        #self.image_id = sha256(dt.datetime.now().isoformat(timespec='milliseconds').encode(encoding='utf-8')).hexdigest()   #   fancy id med sha256 og tid
         self.image_id = dt.datetime.now().isoformat(timespec='milliseconds')
     
-    #--PLANER FOR BUFFER SYSTEMET
-    # ALT som den gjør her (buffering, hashing og tidstaking) kan bli gjort av en annen node, slik at data også kan ta inn
-    # Tilstanden til tanksen som en parameter.
-
-    def event_registry(self, conf: float, time: dt.datetime.isoformat):     #   Buffer system
-        
-        img_id = sha256(time.encode('utf-8')).hexdigest()
-        self.event_buffer.append(f"{conf};{time};{img_id}")
-        
-
-        if len(self.event_buffer) >= int(self.event_buffer_time*10):
-            val_buffer = []
-            for i in range(len(self.event_buffer)):
-                
-                val_buffer.append(float(self.event_buffer[i].split(';')[0]))
-
-            max_val = np.max(val_buffer)
-            index_max = val_buffer.index(max_val)
-
-
-            self.get_logger().info(f"{self.event_buffer[index_max]}")
-
-            val_buffer = []
-            self.event_buffer = []
 
     def detect_image(self):
         if self.processing or self.latest_image is None:
@@ -97,9 +71,7 @@ class ros_yolo(Node):
         
         try:
 
-            img_cv2 = self.cv_bridge.imgmsg_to_cv2(self.latest_image)
-            img_cv2 = cv2.cvtColor(img_cv2, cv2.COLOR_RGB2BGR) #    Hacky løsning fordi cvBridge av en eller anna grunn tror den e RGB (sida meldingstypen sir det)
-
+            img_cv2 = np.frombuffer(self.latest_image.data, dtype=np.uint8).reshape((self.latest_image.height, self.latest_image.width, 3))
             results = self.model.predict(source=img_cv2, 
                                         conf=self.min_conf,
                                         device=self.device,
@@ -115,10 +87,8 @@ class ros_yolo(Node):
                 
                 confidence = result.boxes.conf[0]
 
-                self.event_registry(confidence, self.current_image_id)
-                #self.get_logger().info(f"{confidence}")
-                #cv2.imwrite(os.path.join(self.model_directory, 'results',f'test.png'), img=img_cv2)
-            
+                self.get_logger().info(f"{confidence}")
+                
         finally:
         
             self.processing = False

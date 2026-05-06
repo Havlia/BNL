@@ -4,8 +4,6 @@ set -e
 
 #Startup script for Prosjektet med både globale variabla og Virtuelt environment handling:
 
-BNL_VENV_PATH="/home/${USER}/.BNL_venv"
-
 clean() {
 	exit_code="$?"
 	echo "------------ Environment feilet, sletter filer. Feilkode: ${exit_code} ------------"
