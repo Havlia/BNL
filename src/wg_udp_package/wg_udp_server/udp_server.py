@@ -20,7 +20,7 @@ class udp_server_node(Node):
 
         self.port = 7227
 
-        self.server_address = ('Wall-G-Home-Computer', self.port)
+        self.server_address = (self.ip, self.port)
 
         self.timer = self.create_timer(1/20, self.network_loop)
 

@@ -21,15 +21,12 @@ else
 	python3 -m venv "${BNL_VENV_PATH}/.venv" && source "${BNL_VENV_PATH}/.venv/bin/activate"
 	pip install --no-cache-dir	cython \
 					numpy==1.26.4 \
-					cuda-toolkit \
 					pillow \
 		 			matplotlib \
 		 			PyQt5 \
 		 			PyYAML \
 		 			cocotools \
-		 			cuda-toolkit \
-		 			torch \
-		 			torchvision \
+					torch torchvision --index-url https://download.pytorch.org/whl/cpu\
 		 			ultralytics-opencv-headless
 	deactivate
 	
