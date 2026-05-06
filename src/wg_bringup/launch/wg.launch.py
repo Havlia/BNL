@@ -129,7 +129,7 @@ def generate_launch_description():
             PathJoinSubstitution([sim_pkg_path, 'gazebo_includes', 'models'])
         ),
         SetEnvironmentVariable(
-            'BNL_VENV_PATH',os.path.expandvars('/home/${USER}/.BNL_venv/.venv') 
+            'BNL_VENV_PATH',os.path.expandvars('/home/${USER}/.BNL_venv') 
         ),
         SetEnvironmentVariable(
             'ROS_DOMAIN_ID','81'
