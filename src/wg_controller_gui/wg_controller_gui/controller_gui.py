@@ -42,6 +42,7 @@ class controller_gui_node(Node):
 
         self.rviz_window = QWidget()
         self.rviz_window.setWindowTitle("Rviz2 Window")
+        self.rviz_render = QRe
 
         self.image_window = QWidget()
         self.image_window.setWindowTitle("Image Segmentation History")

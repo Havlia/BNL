@@ -55,14 +55,19 @@ if test -d "${BNL_VENV_PATH}/.venv2"; then
 else
 	echo -e "\033[31mFinner ikke Venv2 mappe, bygger...\033[0m" && mkdir -p "${BNL_VENV_PATH}"
 	python3 -m venv "${BNL_VENV_PATH}/.venv2" && source "${BNL_VENV_PATH}/.venv2/bin/activate"
-	pip install --no-cache-dir	adafruit-circuitpython-pca9685 \
-					adafruit-circuitpython-servokit \
-					PyYAML \
-					RPi.GPIO \
-					numpy
 	
+	pip install --no-cache-dir --no-deps	adafruit-circuitpython-pca9685 \
+						adafruit-circuitpython-servokit \
+						PyYAML \
+						numpy
 	cd ~
-	pip3 install adafruit-blinka
+	git clone https://github.com/underground-software/RPi.GPIO2 gpio2
+	cd gpio2
+	pip install -r requirements.txt
+	make
+	source non_root_permission.sh
+	
+	pip3 install --no-deps adafruit-blinka
 	
 	sudo raspi-config nonint do_i2c 0
 	sudo raspi-config nonint do_spi 0
