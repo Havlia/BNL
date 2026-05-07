@@ -76,6 +76,27 @@ def generate_launch_description():
         condition=IfCondition(PythonExpression(["'", mode, "' == 'real'"])),
     )
 
+    ldlidar_node = Node(
+        package='ldlidar_ros2',
+        executable='ldlidar_ros2_node',
+        name='ldlidar_publisher_ld06',
+        output='screen',
+        parameters=[
+            {'product_name': 'LDLiDAR_LD06'},
+            {'laser_scan_topic_name': 'scan'},
+            {'point_cloud_2d_topic_name': 'pointcloud2d'},
+            {'frame_id': 'base_laser'},
+            {'port_name': '/dev/ttyAMA0'},
+            {'serial_baudrate': 230400},
+            {'laser_scan_dir': True},
+            {'enable_angle_crop_func': False},
+            {'angle_crop_min': 135.0},  # unit is degress
+            {'angle_crop_max': 225.0},  # unit is degress
+            {'range_min': 0.02}, # unit is meter
+            {'range_max': 12.0}   # unit is meter
+      ]
+  )
+
     nav2_launch_node = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(nav2_launch_path),
         launch_arguments={
@@ -120,6 +141,7 @@ def generate_launch_description():
     wait_sec_node = TimerAction(period=2.0,
                                 actions=[   gz_start_node,
                                             bridge_node,
+                                            ldlidar_node,
                                             nav2_launch_node,
                                             explorer_node,
                                             robot_state_publisher,
