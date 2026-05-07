@@ -4,12 +4,12 @@ from launch.actions import DeclareLaunchArgument
 from launch.substitutions import Command, LaunchConfiguration, PythonExpression
 from launch.conditions import IfCondition
 from launch_ros.actions import Node
-from launch_ros.parameter_descriptions import ParameterValue
 from launch.actions import SetEnvironmentVariable, IncludeLaunchDescription, TimerAction, RegisterEventHandler, DeclareLaunchArgument
 from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
+import launch_ros.actions
 import os
 
 def generate_launch_description():
@@ -17,17 +17,19 @@ def generate_launch_description():
     sim_pkg_path = FindPackageShare('simulation_package')
     gz_launch_path = PathJoinSubstitution([ros_gz_sim_pkg_path, 'launch', 'gz_sim.launch.py'])
     
+    wallg_urdf_path = os.path.join(get_package_share_directory('wg_navigation'), 'params', 'wall_g.urdf')
+    nav2_params = os.path.join(get_package_share_directory('wg_navigation'), 'params', 'nav2_params_wallg.yaml')
+
+    nav2_launch_path = os.path.join(get_package_share_directory('nav2_bringup'), 'launch', 'bringup_launch.py')
+
+    explorer_config = os.path.join(get_package_share_directory("explore_lite"), "config", "params.yaml")
+
     mode = LaunchConfiguration('mode')
-    udp = LaunchConfiguration('udp')
 
     mode_arg = DeclareLaunchArgument('mode', 
                           default_value='sim',
                           description="Launch argument som bestemme om vi kjøre simulasjon eller ikke."
                           )
-    
-    udp_arg = DeclareLaunchArgument('udp',
-                                    default_value='server',
-                                    description="Velge om du e client eller server.")
 
 
     startup_node = Node(
@@ -57,13 +59,6 @@ def generate_launch_description():
 
     )
 
-    hack_node_gz_topic_list = Node(
-        package='wg_yolo_package',
-        executable='HACK_run_topic_list.sh',
-        name='hacky_node_gz',
-        output='screen'
-    )
-
     gz_start_node = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(gz_launch_path),
         launch_arguments={
@@ -81,6 +76,39 @@ def generate_launch_description():
         condition=IfCondition(PythonExpression(["'", mode, "' == 'real'"])),
     )
 
+    nav2_launch_node = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(nav2_launch_path),
+        launch_arguments={
+            'namespace': '',
+            'use_sim_time': 'False',
+            'autostart': 'True',
+            'slam': 'True',
+            'params_file': nav2_params,
+        }.items(),
+        condition=IfCondition(PythonExpression(["'", mode, "' == 'real'"])),
+
+    )
+    
+    with open(wallg_urdf_path, 'r') as infp:
+        robot_desc = infp.read()
+
+    params = {'robot_description': robot_desc}
+
+    robot_state_publisher = launch_ros.actions.Node(package='robot_state_publisher',
+                                  executable='robot_state_publisher',
+                                  output='both',
+                                  parameters=[params])
+
+    explorer_node = Node(
+        package="explore_lite",
+        name="explore_node",
+        namespace='',
+        executable="explore",
+        parameters=[explorer_config, {"use_sim_time": False}],
+        output="screen",
+        remappings=[("/tf", "tf"), ("/tf_static", "tf_static")],
+    )
+
     gui_node = Node(
         package='wg_controller_gui',
         executable='controller_gui_exec',
@@ -89,30 +117,14 @@ def generate_launch_description():
         condition=IfCondition(PythonExpression(["'", mode, "' == 'real'"])),
     )
 
-    udp_server_node = Node(
-        package='wg_udp_package',
-        executable='udp_server_exec',
-        name='udp_server',
-        output='screen',
-        condition=IfCondition(PythonExpression(["'", udp, "' == 'server'"])),
-    )
-
-    udp_client_node = Node(
-        package='wg_udp_package',
-        executable='udp_client_exec',
-        name='udp_client',
-        output='screen',
-        condition=IfCondition(PythonExpression(["'", udp, "' == 'client'"])),
-    )
-
     wait_sec_node = TimerAction(period=2.0,
                                 actions=[   gz_start_node,
-                                            #hack_node_gz_topic_list,
                                             bridge_node,
+                                            nav2_launch_node,
+                                            explorer_node,
+                                            robot_state_publisher,
                                             wrapper_node,
                                             #picamera_node,
-                                            udp_client_node,
-                                            udp_server_node,
                                             gui_node])
 
     return LaunchDescription([

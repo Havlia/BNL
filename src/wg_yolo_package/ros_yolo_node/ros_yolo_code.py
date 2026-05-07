@@ -5,6 +5,7 @@ import os
 import numpy as np
 import math
 from sensor_msgs.msg import Image
+from wg_interface.srv import BearStatus
 from data_utilities.qos_profiles import default_qos_profile
 from ament_index_python import get_package_prefix
 from ultralytics import YOLO
@@ -36,9 +37,12 @@ class ros_yolo(Node):
         self.event_buffer      = []
         self.min_conf = 0.45            #   Minimum konfidens
 
+        self.bear_found = False
+
         self.start_yolo()
 
         self.create_subscription(Image, 'camera_image', self.image_callback, default_qos_profile)
+        self.create_service(BearStatus, 'bear_discovery', self.detect_bear)
 
         self.cv_bridge = cv_bridge.CvBridge()
         self.latest_image           = None
@@ -93,7 +97,10 @@ class ros_yolo(Node):
         
             self.processing = False
 
+    def detect_bear(self, request, response):
         
+        response.bear_discovery_status = self.bear_found
+        return response
 
 def main(args=None):
     rclpy.init(args=args)

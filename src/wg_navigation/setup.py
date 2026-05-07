@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'wg_picamera'
+package_name = 'wg_navigation'
 
 setup(
     name=package_name,
@@ -10,6 +10,8 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name + '/params', [  'params/nav2_params_wallg.yaml', 
+                                                'params/wall_g.urdf'])
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -24,7 +26,6 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'wg_picamera_exec = wg_picamera.camera_interface:main'
         ],
     },
 )

@@ -1,0 +1,3 @@
+[submodule "src/wg_explorer"]
+	path = src/wg_explorer
+	url = https://github.com/robo-friends/m-explore-ros2

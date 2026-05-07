@@ -1,0 +1,13 @@
+<library path="wg_bt_nodes">
+
+  <class
+    type="wg_bt_nodes::BearStatusCondition"
+    base_class_type="BT::ConditionNode">
+
+    <description>
+      Checks BearStatus from service
+    </description>
+
+  </class>
+
+</library>

@@ -64,6 +64,7 @@ class ros_picamera(Node):
                 self.buf = self.buf[end+2:]
 
                 img = cv2.imdecode(np.frombuffer(jpg, dtype=np.uint8), cv2.IMREAD_COLOR)
+                img = cv2.rotate(img, cv2.ROTATE_180)
 
                 if img is not None:
                     pass
@@ -73,7 +74,7 @@ class ros_picamera(Node):
 
             with self.lock:
                 if img is not None:
-                    self.latest_frame = img 
+                    self.latest_frame = img
 
     
     def image_callback(self):
