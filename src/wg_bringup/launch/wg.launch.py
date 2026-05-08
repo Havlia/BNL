@@ -103,6 +103,7 @@ def generate_launch_description():
         launch_arguments={
             'namespace': '',
             'use_sim_time': 'False',
+            'use_localization': 'True',
             'autostart': 'True',
             'slam': 'True',
             'rviz': 'True',
@@ -157,7 +158,7 @@ def generate_launch_description():
                                             nav2_launch_node,
                                             explorer_node,
                                             robot_state_publisher,
-                                            nav2_rviz_node,
+                                            #nav2_rviz_node,
                                             #wrapper_node,
                                             #picamera_node,
                                             gui_node])

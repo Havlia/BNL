@@ -1,0 +1,482 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="URDF_ASSEMBLY">
+    <link name="base_link-v5">
+        <inertial>
+            <origin xyz="0.0011391242710078041 0.001681038838694394 0.007714444222743145" rpy="0.0 0.0 0.0" />
+            <mass value="2.60032387092806" />
+            <inertia ixx="0.02174869874745578" iyy="0.012105022667096045" izz="0.031153275076145504" ixy="0.0003125793574762092" iyz="0.0003850665620782282" ixz="-5.506011748847823e-06" />
+        </inertial>
+        <visual name="base_link-v5_visual">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <geometry>
+                <mesh filename="meshes/base_link-v5.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="base_link-v5_collision">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <geometry>
+                <mesh filename="meshes/base_link-v5.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="beltestrammer-wide-BB-left-v6">
+        <inertial>
+            <origin xyz="-0.002322841505746922 0.016246428818719773 0.003697887853901367" rpy="-3.038581678643136e-64 -0.0 0.0" />
+            <mass value="0.10362538523054685" />
+            <inertia ixx="6.483689214103073e-05" iyy="1.57984169928797e-05" izz="7.864943713752708e-05" ixy="-1.5862014401489907e-05" iyz="-3.2929217929224364e-06" ixz="-7.574766587990126e-07" />
+        </inertial>
+        <visual name="beltestrammer-wide-BB-left-v6_visual">
+            <origin xyz="-0.007000000397062953 -1.78805950046268e-09 0.004799996686574115" rpy="4.3062680955652823e-16 1.5707963267948963 0" />
+            <geometry>
+                <mesh filename="meshes/beltestrammer-wide-BB-left-v6.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="beltestrammer-wide-BB-left-v6_collision">
+            <origin xyz="-0.007000000397062953 -1.78805950046268e-09 0.004799996686574115" rpy="4.3062680955652823e-16 1.5707963267948963 0" />
+            <geometry>
+                <mesh filename="meshes/beltestrammer-wide-BB-left-v6.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="beltestrammer-wide-BB-right-v2">
+        <inertial>
+            <origin xyz="-0.002322847027853179 0.016246423211739275 -0.0036978797919794636" rpy="-3.038581678643136e-64 -0.0 0.0" />
+            <mass value="0.10362533685583374" />
+            <inertia ixx="6.483691389927069e-05" iyy="1.579839732998057e-05" izz="7.864946864337725e-05" ixy="-1.586200047483701e-05" iyz="3.2928648714801317e-06" ixz="7.574665588104588e-07" />
+        </inertial>
+        <visual name="beltestrammer-wide-BB-right-v2_visual">
+            <origin xyz="-0.007000000397062953 -1.7880594849195575e-09 0.02879999668657435" rpy="4.3062680955652823e-16 1.5707963267948963 0" />
+            <geometry>
+                <mesh filename="meshes/beltestrammer-wide-BB-right-v2.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="beltestrammer-wide-BB-right-v2_collision">
+            <origin xyz="-0.007000000397062953 -1.7880594849195575e-09 0.02879999668657435" rpy="4.3062680955652823e-16 1.5707963267948963 0" />
+            <geometry>
+                <mesh filename="meshes/beltestrammer-wide-BB-right-v2.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="drivewheel-right">
+        <inertial>
+            <origin xyz="-3.9728215384116084e-10 0.00012849862764078513 0.011091461161683754" rpy="-3.038581678643136e-64 -0.0 0.0" />
+            <mass value="0.2722552771680154" />
+            <inertia ixx="5.683567469898796e-05" iyy="5.729573129027459e-05" izz="9.129633677439756e-05" ixy="-1.3893508739315495e-15" iyz="7.051818536128304e-08" ixz="-1.5482407023093e-16" />
+        </inertial>
+        <visual name="drivewheel-right_visual">
+            <origin xyz="-0.013500000397063113 1.7880595337693705e-09 0.01600000331342548" rpy="-1.5707963267948968 -2.955968803064477e-15 -1.5707963267948966" />
+            <geometry>
+                <mesh filename="meshes/drivewheel-right.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="drivewheel-right_collision">
+            <origin xyz="-0.013500000397063113 1.7880595337693705e-09 0.01600000331342548" rpy="-1.5707963267948968 -2.955968803064477e-15 -1.5707963267948966" />
+            <geometry>
+                <mesh filename="meshes/drivewheel-right.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="drivewheel_left">
+        <inertial>
+            <origin xyz="-3.9728215384116084e-10 -0.0001284950515216421 -0.011091454534832205" rpy="-3.038581678643136e-64 -0.0 0.0" />
+            <mass value="0.2722552771680154" />
+            <inertia ixx="5.683567469898752e-05" iyy="5.729573129027416e-05" izz="9.129633677439712e-05" ixy="1.3895135042574223e-15" iyz="7.051818536074094e-08" ixz="1.550409106654271e-16" />
+        </inertial>
+        <visual name="drivewheel_left_visual">
+            <origin xyz="-0.013500000397063117 1.7880596581143494e-09 -0.01599999668657393" rpy="1.5707963267948963 -9.880984919163882e-15 1.5707963267948966" />
+            <geometry>
+                <mesh filename="meshes/drivewheel_left.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="drivewheel_left_collision">
+            <origin xyz="-0.013500000397063117 1.7880596581143494e-09 -0.01599999668657393" rpy="1.5707963267948963 -9.880984919163882e-15 1.5707963267948966" />
+            <geometry>
+                <mesh filename="meshes/drivewheel_left.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="left_back_axle">
+        <inertial>
+            <origin xyz="-3.967740819232901e-10 4.87860731368528e-09 0.010577930442667843" rpy="-3.038581678643136e-64 -0.0 0.0" />
+            <mass value="0.022362036109177027" />
+            <inertia ixx="1.7963709468209839e-06" iyy="1.796370932286413e-06" izz="4.5612686181911516e-07" ixy="-3.388131789017201e-21" iyz="2.7105054312137605e-20" ixz="9.524038458927351e-18" />
+        </inertial>
+        <visual name="left_back_axle_visual">
+            <origin xyz="-3.970629314231644e-10 4.87860731368528e-09 0.02749999668657418" rpy="-3.141592653589793 -3.366199109841196e-17 3.1415926535897927" />
+            <geometry>
+                <mesh filename="meshes/left_back_axle.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="left_back_axle_collision">
+            <origin xyz="-3.970629314231644e-10 4.87860731368528e-09 0.02749999668657418" rpy="-3.141592653589793 -3.366199109841196e-17 3.1415926535897927" />
+            <geometry>
+                <mesh filename="meshes/left_back_axle.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="left_front_axle">
+        <inertial>
+            <origin xyz="-3.9677405472282603e-10 4.87860708275889e-09 0.010577930442667806" rpy="-3.038581678643136e-64 -0.0 0.0" />
+            <mass value="0.022362036109177027" />
+            <inertia ixx="1.7963709468210923e-06" iyy="1.796370932286413e-06" izz="4.5612686181914226e-07" ixy="-1.6940658945086005e-21" iyz="4.698581855887738e-39" ixz="9.522344393032843e-18" />
+        </inertial>
+        <visual name="left_front_axle_visual">
+            <origin xyz="-3.9706290422270033e-10 4.87860708275889e-09 0.027499996686574147" rpy="-3.141592653589793 -3.3661991098415095e-17 3.1415926535897927" />
+            <geometry>
+                <mesh filename="meshes/left_front_axle.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="left_front_axle_collision">
+            <origin xyz="-3.9706290422270033e-10 4.87860708275889e-09 0.027499996686574147" rpy="-3.141592653589793 -3.3661991098415095e-17 3.1415926535897927" />
+            <geometry>
+                <mesh filename="meshes/left_front_axle.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="right_back_axle">
+        <inertial>
+            <origin xyz="-3.973517037625385e-10 4.8786073492124165e-09 -0.010577937069519355" rpy="-3.038581678643136e-64 -0.0 0.0" />
+            <mass value="0.022362036109177027" />
+            <inertia ixx="1.7963709468210923e-06" iyy="1.796370932286413e-06" izz="4.5612686181914226e-07" ixy="-5.082197683525801e-21" iyz="-2.7105054312137605e-20" ixz="9.520650327138334e-18" />
+        </inertial>
+        <visual name="right_back_axle_visual">
+            <origin xyz="-3.970628542626642e-10 4.8786073492124165e-09 -0.027500003313425694" rpy="-3.3306690738754696e-16 3.366199109841494e-17 -4.3062680955652813e-16" />
+            <geometry>
+                <mesh filename="meshes/right_back_axle.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="right_back_axle_collision">
+            <origin xyz="-3.970628542626642e-10 4.8786073492124165e-09 -0.027500003313425694" rpy="-3.3306690738754696e-16 3.366199109841494e-17 -4.3062680955652813e-16" />
+            <geometry>
+                <mesh filename="meshes/right_back_axle.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="right_front_axle">
+        <inertial>
+            <origin xyz="-3.9735172041588386e-10 4.87860708275889e-09 -0.010577937069519247" rpy="-3.038581678643136e-64 -0.0 0.0" />
+            <mass value="0.022362036109177027" />
+            <inertia ixx="1.7963709468212007e-06" iyy="1.796370932286386e-06" izz="4.5612686181914226e-07" ixy="-6.776263578034402e-21" iyz="-5.421010862427521e-20" ixz="9.524038458927351e-18" />
+        </inertial>
+        <visual name="right_front_axle_visual">
+            <origin xyz="-3.9706287036089806e-10 4.87860708275889e-09 -0.027500003313425586" rpy="-3.3306690738754696e-16 3.366199109841494e-17 -4.3062680955652813e-16" />
+            <geometry>
+                <mesh filename="meshes/right_front_axle.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="right_front_axle_collision">
+            <origin xyz="-3.9706287036089806e-10 4.87860708275889e-09 -0.027500003313425586" rpy="-3.3306690738754696e-16 3.366199109841494e-17 -4.3062680955652813e-16" />
+            <geometry>
+                <mesh filename="meshes/right_front_axle.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="right_back_rullehjul">
+        <inertial>
+            <origin xyz="0.020753802019628224 -4.878607384739553e-09 3.9706291532493053e-10" rpy="0.0 -0.0 1.611985913112624e-65" />
+            <mass value="0.153373103786445" />
+            <inertia ixx="3.478630412739989e-05" iyy="2.4780684697126108e-05" izz="2.4780684697124807e-05" ixy="1.2217820851357128e-36" iyz="-1.7618285302889447e-19" ixz="4.0657581468206416e-20" />
+        </inertial>
+        <visual name="right_back_rullehjul_visual">
+            <origin xyz="0.010000003313425694 -4.8786073492124165e-09 3.970628553728872e-10" rpy="3.141592653589793 -1.5707963267948963 0" />
+            <geometry>
+                <mesh filename="meshes/right_back_rullehjul.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="right_back_rullehjul_collision">
+            <origin xyz="0.010000003313425694 -4.8786073492124165e-09 3.970628553728872e-10" rpy="3.141592653589793 -1.5707963267948963 0" />
+            <geometry>
+                <mesh filename="meshes/right_back_rullehjul.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="right_front_rullehjul">
+        <inertial>
+            <origin xyz="0.020753802019628207 -4.878607118286027e-09 3.970629314231644e-10" rpy="0.0 -0.0 1.611985913112624e-65" />
+            <mass value="0.153373103786445" />
+            <inertia ixx="3.478630412740054e-05" iyy="2.4780684697126324e-05" izz="2.4780684697124807e-05" ixy="4.336808689942018e-19" iyz="-1.7618285302889447e-19" ixz="5.421010862427522e-20" />
+        </inertial>
+        <visual name="right_front_rullehjul_visual">
+            <origin xyz="0.010000003313425694 -4.878607100522459e-09 3.9706287147112106e-10" rpy="3.141592653589793 -1.5707963267948963 0" />
+            <geometry>
+                <mesh filename="meshes/right_front_rullehjul.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="right_front_rullehjul_collision">
+            <origin xyz="0.010000003313425694 -4.878607100522459e-09 3.9706287147112106e-10" rpy="3.141592653589793 -1.5707963267948963 0" />
+            <geometry>
+                <mesh filename="meshes/right_front_rullehjul.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="left_back_rullehjul">
+        <inertial>
+            <origin xyz="-0.02075379539277665 -4.8786073492124165e-09 3.9706287091600956e-10" rpy="0.0 -0.0 1.6572362989326831e-65" />
+            <mass value="0.153373103786445" />
+            <inertia ixx="3.478630412739967e-05" iyy="2.4780684697125884e-05" izz="2.47806846971248e-05" ixy="2.443564170271396e-36" iyz="1.219727444046192e-19" ixz="6.776263578034402e-20" />
+        </inertial>
+        <visual name="left_back_rullehjul_visual">
+            <origin xyz="-0.00999999668657412 -4.87860731368528e-09 3.970629308680529e-10" rpy="-3.141592653589793 1.570796326794896 0" />
+            <geometry>
+                <mesh filename="meshes/left_back_rullehjul.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="left_back_rullehjul_collision">
+            <origin xyz="-0.00999999668657412 -4.87860731368528e-09 3.970629308680529e-10" rpy="-3.141592653589793 1.570796326794896 0" />
+            <geometry>
+                <mesh filename="meshes/left_back_rullehjul.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="left_right_rullehjul">
+        <inertial>
+            <origin xyz="-0.02075379539277658 -4.878607100522459e-09 3.9706283372353824e-10" rpy="0.0 -0.0 -2.1409907993723302e-65" />
+            <mass value="0.153373103786445" />
+            <inertia ixx="3.478630412740054e-05" iyy="2.4780684697125884e-05" izz="2.47806846971248e-05" ixy="2.4435641702713966e-36" iyz="1.35525271560688e-19" ixz="5.4210108624275216e-20" />
+        </inertial>
+        <visual name="left_right_rullehjul_visual">
+            <origin xyz="-0.009999996686574048 -4.87860708275889e-09 3.9706289367558157e-10" rpy="-3.141592653589793 1.570796326794896 0" />
+            <geometry>
+                <mesh filename="meshes/left_right_rullehjul.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="left_right_rullehjul_collision">
+            <origin xyz="-0.009999996686574048 -4.87860708275889e-09 3.9706289367558157e-10" rpy="-3.141592653589793 1.570796326794896 0" />
+            <geometry>
+                <mesh filename="meshes/left_right_rullehjul.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="lidar-tilt-mount-v1">
+        <inertial>
+            <origin xyz="0.00033459288765374184 -4.878590769141766e-09 -0.009290633618690265" rpy="0.0 -0.0 -3.421138828918011e-49" />
+            <mass value="0.12022388659708504" />
+            <inertia ixx="2.9802681969052183e-05" iyy="5.404823010349127e-05" izz="5.831254704107965e-05" ixy="1.041757263812885e-16" iyz="3.298853707922113e-17" ixz="6.80035619153982e-07" />
+        </inertial>
+        <visual name="lidar-tilt-mount-v1_visual">
+            <origin xyz="3.3134257731992635e-09 -4.878607033909077e-09 3.970628448257685e-10" rpy="3.141592653589793 1.9428902930945143e-16 -5.551115123108612e-17" />
+            <geometry>
+                <mesh filename="meshes/lidar-tilt-mount-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="lidar-tilt-mount-v1_collision">
+            <origin xyz="3.3134257731992635e-09 -4.878607033909077e-09 3.970628448257685e-10" rpy="3.141592653589793 1.9428902930945143e-16 -5.551115123108612e-17" />
+            <geometry>
+                <mesh filename="meshes/lidar-tilt-mount-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="lidar-tilt-v2">
+        <inertial>
+            <origin xyz="0.023023098451877437 0.02538720791733402 0.0270074651594607" rpy="0.0 -0.0 0.0" />
+            <mass value="0.17525573996495758" />
+            <inertia ixx="3.173086845202188e-05" iyy="2.3795971061500373e-05" izz="4.6958212460902746e-05" ixy="-6.508938208252282e-07" iyz="1.3803500716438638e-06" ixz="-5.861864375316741e-07" />
+        </inertial>
+        <visual name="lidar-tilt-v2_visual">
+            <origin xyz="0.019851603313425746 0.006738984878624735 0.06392532202565512" rpy="-8.831230471736972e-13 -1.942890293095494e-16 -1.110223024625156e-16" />
+            <geometry>
+                <mesh filename="meshes/lidar-tilt-v2.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="lidar-tilt-v2_collision">
+            <origin xyz="0.019851603313425746 0.006738984878624735 0.06392532202565512" rpy="-8.831230471736972e-13 -1.942890293095494e-16 -1.110223024625156e-16" />
+            <geometry>
+                <mesh filename="meshes/lidar-tilt-v2.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="LD06_LiDAR-v9">
+        <inertial>
+            <origin xyz="-0.0032573327950152497 0.006749989770242544 0.10540105482539719" rpy="0.0 -0.0 0.0" />
+            <mass value="0.3162775249943888" />
+            <inertia ixx="6.0353419796394664e-05" iyy="5.97894970120064e-05" izz="6.503477419668739e-05" ixy="7.793133158796433e-07" iyz="4.394635381868659e-08" ixz="-4.12990041831566e-07" />
+        </inertial>
+        <visual name="LD06_LiDAR-v9_visual">
+            <origin xyz="-0.0031483966865742574 0.0067389848786385455 0.09012147202564384" rpy="8.831230471737002e-13 1.9428902930965762e-16 3.141592653589793" />
+            <geometry>
+                <mesh filename="meshes/LD06_LiDAR-v9.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="LD06_LiDAR-v9_collision">
+            <origin xyz="-0.0031483966865742574 0.0067389848786385455 0.09012147202564384" rpy="8.831230471737002e-13 1.9428902930965762e-16 3.141592653589793" />
+            <geometry>
+                <mesh filename="meshes/LD06_LiDAR-v9.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="standoff-cam-v1">
+        <inertial>
+            <origin xyz="-0.0031483965075215004 0.010896201373470901 0.0901214720256147" rpy="0.0 -0.0 0.0" />
+            <mass value="0.0003226376385328687" />
+            <inertia ixx="1.7113041554291153e-09" iyy="8.036836529810607e-10" izz="1.711304259607815e-09" ixy="-2.387574120073059e-20" iyz="1.0587911840678754e-21" ixz="-5.293955920339377e-23" />
+        </inertial>
+        <visual name="standoff-cam-v1_visual">
+            <origin xyz="-0.0031483965077602804 0.012238984878625542 0.09012147202561352" rpy="3.1415926535889103 -1.942890293094024e-16 5.5511151231257704e-17" />
+            <geometry>
+                <mesh filename="meshes/standoff-cam-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="standoff-cam-v1_collision">
+            <origin xyz="-0.0031483965077602804 0.012238984878625542 0.09012147202561352" rpy="3.1415926535889103 -1.942890293094024e-16 5.5511151231257704e-17" />
+            <geometry>
+                <mesh filename="meshes/standoff-cam-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Cam-V2.1-v1-v1">
+        <inertial>
+            <origin xyz="0.010565654875908832 -0.002110772686493263 0.0013912807416083784" rpy="0.0 -0.0 0.0" />
+            <mass value="0.006742869777511253" />
+            <inertia ixx="2.7217631574982847e-07" iyy="2.563493132896201e-07" izz="4.974708066742169e-07" ixy="3.3571873536045558e-09" iyz="-8.162935022052601e-09" ixz="-2.4899282536612416e-10" />
+        </inertial>
+        <visual name="Cam-V2.1-v1-v1_visual">
+            <origin xyz="0.010500003492239687 -0.0025000020256127444 4.8786277950796376e-09" rpy="3.141592653589793 -1.5707963267940135 0" />
+            <geometry>
+                <mesh filename="meshes/Cam-V2.1-v1-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="Cam-V2.1-v1-v1_collision">
+            <origin xyz="0.010500003492239687 -0.0025000020256127444 4.8786277950796376e-09" rpy="3.141592653589793 -1.5707963267940135 0" />
+            <geometry>
+                <mesh filename="meshes/Cam-V2.1-v1-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="distance-sensor-holder-v3">
+        <inertial>
+            <origin xyz="0.018500003313373148 -0.022999995738979463 -0.0014999955645600771" rpy="-2.7755575615628914e-17 -0.0 4.276423536147514e-50" />
+            <mass value="0.06507667394584607" />
+            <inertia ixx="2.0283095621670144e-05" iyy="1.4109436186384273e-05" izz="3.4294916797135015e-05" ixy="3.68500857828325e-20" iyz="8.343274530454858e-20" ixz="-4.614249168337192e-20" />
+        </inertial>
+        <visual name="distance-sensor-holder-v3_visual">
+            <origin xyz="-0.006499996686574153 -0.0529999957389795 4.4354398909263185e-09" rpy="-1.5707963267948961 2.7931113831887584e-17 2.0012388088661364e-16" />
+            <geometry>
+                <mesh filename="meshes/distance-sensor-holder-v3.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="distance-sensor-holder-v3_collision">
+            <origin xyz="-0.006499996686574153 -0.0529999957389795 4.4354398909263185e-09" rpy="-1.5707963267948961 2.7931113831887584e-17 2.0012388088661364e-16" />
+            <geometry>
+                <mesh filename="meshes/distance-sensor-holder-v3.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Sharp_IR-Sensor-v1">
+        <inertial>
+            <origin xyz="0.01788252138120537 -0.0005812240648430278 -0.00623538753345084" rpy="-8.433758354584419e-81 -1.3684555315672042e-48 0.0" />
+            <mass value="0.023154010358401048" />
+            <inertia ixx="5.253597502543521e-07" iyy="2.279930192206461e-06" izz="2.3742197950757417e-06" ixy="-1.3992067426816744e-08" iyz="1.997137361960359e-09" ixz="-6.95384436791084e-08" />
+        </inertial>
+        <visual name="Sharp_IR-Sensor-v1_visual">
+            <origin xyz="0.0037500033134258205 0.006337720011800056 -0.0008907056089508814" rpy="-1.4311699866353476 -3.8467361969441786e-17 -3.141592653589793" />
+            <geometry>
+                <mesh filename="meshes/Sharp_IR-Sensor-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="Sharp_IR-Sensor-v1_collision">
+            <origin xyz="0.0037500033134258205 0.006337720011800056 -0.0008907056089508814" rpy="-1.4311699866353476 -3.8467361969441786e-17 -3.141592653589793" />
+            <geometry>
+                <mesh filename="meshes/Sharp_IR-Sensor-v1.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="base_link-v5_Rigid-1" type="fixed">
+        <origin xyz="-0.08400000331342582 -0.038666664878603596 0.013227668243784171" rpy="-5.551115123125779e-17 -1.5707963267948961 0" />
+        <parent link="base_link-v5" />
+        <child link="beltestrammer-wide-BB-left-v6" />
+    </joint>
+    <joint name="base_link-v5_Rigid-2" type="fixed">
+        <origin xyz="0.08399999668657433 -0.0386666648786036 0.013227668243784137" rpy="-5.551115123125779e-17 -1.5707963267948961 0" />
+        <parent link="base_link-v5" />
+        <child link="beltestrammer-wide-BB-right-v2" />
+    </joint>
+    <joint name="beltestrammer-wide-BB-right-v2_Revolute-3" type="continuous">
+        <origin xyz="0.0 2.220446049250313e-18 -0.0062999999999999905" rpy="3.141592653589793 -0.0 0.0" />
+        <parent link="beltestrammer-wide-BB-right-v2" />
+        <child link="drivewheel-right" />
+        <axis xyz="-6.162975822039155e-33 2.1005126272699612e-48 0.9999999999999999" />
+    </joint>
+    <joint name="beltestrammer-wide-BB-left-v6_Revolute-4" type="continuous">
+        <origin xyz="0.0 2.220446049250313e-18 0.006300000000000008" rpy="3.141592653589793 -0.0 0.0" />
+        <parent link="beltestrammer-wide-BB-left-v6" />
+        <child link="drivewheel_left" />
+        <axis xyz="-6.162975822039155e-33 2.1005126272699612e-48 0.9999999999999999" />
+    </joint>
+    <joint name="base_link-v5_Rigid-33" type="fixed">
+        <origin xyz="0.07999999668657427 0.11599999512139653 -0.04177233175621591" rpy="-5.551115123125779e-17 -1.5707963267948961 0" />
+        <parent link="base_link-v5" />
+        <child link="right_front_axle" />
+    </joint>
+    <joint name="base_link-v5_Rigid-34" type="fixed">
+        <origin xyz="0.07999999668657436 -0.11600000487860371 -0.04177233175621591" rpy="-5.551115123125779e-17 -1.5707963267948961 0" />
+        <parent link="base_link-v5" />
+        <child link="right_back_axle" />
+    </joint>
+    <joint name="base_link-v5_Rigid-35" type="fixed">
+        <origin xyz="-0.0800000033134258 -0.11600000487860371 -0.041772331756215884" rpy="-5.551115123125779e-17 -1.5707963267948961 0" />
+        <parent link="base_link-v5" />
+        <child link="left_back_axle" />
+    </joint>
+    <joint name="base_link-v5_Rigid-36" type="fixed">
+        <origin xyz="-0.08000000331342587 0.11599999512139653 -0.041772331756215884" rpy="-5.551115123125779e-17 -1.5707963267948961 0" />
+        <parent link="base_link-v5" />
+        <child link="left_front_axle" />
+    </joint>
+    <joint name="right_back_axle_Rigid-37" type="fixed">
+        <origin xyz="0.0 0.0 0.0" rpy="3.141592653589793 1.5707963267948966 0" />
+        <parent link="right_back_axle" />
+        <child link="right_back_rullehjul" />
+    </joint>
+    <joint name="right_front_axle_Rigid-38" type="fixed">
+        <origin xyz="0.0 -1.7763568394002505e-17 0.0" rpy="3.141592653589793 1.5707963267948966 0" />
+        <parent link="right_front_axle" />
+        <child link="right_front_rullehjul" />
+    </joint>
+    <joint name="left_back_axle_Rigid-39" type="fixed">
+        <origin xyz="0.0 0.0 -8.881784197001253e-18" rpy="3.141592653589793 1.5707963267948966 0" />
+        <parent link="left_back_axle" />
+        <child link="left_back_rullehjul" />
+    </joint>
+    <joint name="left_front_axle_Rigid-40" type="fixed">
+        <origin xyz="0.0 -1.7763568394002505e-17 -8.881784197001253e-18" rpy="-3.141592653589793 1.5707963267948966 0" />
+        <parent link="left_front_axle" />
+        <child link="left_right_rullehjul" />
+    </joint>
+    <joint name="base_link-v5_Rigid-21" type="fixed">
+        <origin xyz="-3.3134257629297004e-09 -4.87860355891101e-09 0.03272766824378417" rpy="3.1415926535889103 1.9428902930940242e-16 -5.551115123125779e-17" />
+        <parent link="base_link-v5" />
+        <child link="lidar-tilt-mount-v1" />
+    </joint>
+    <joint name="lidar-tilt-mount-v1_Revolute-22" type="revolute">
+        <origin xyz="-0.0253516 0.019538979999960942 0.04422917000001725" rpy="-3.1415926535889103 0.0 0.0" />
+        <parent link="lidar-tilt-mount-v1" />
+        <child link="lidar-tilt-v2" />
+        <axis xyz="1.0 0.0 0.0" />
+        <limit lower="-0.436332" upper="0.436332" effort="1000000" velocity="1000000" />
+    </joint>
+    <joint name="lidar-tilt-v2_Rigid-25" type="fixed">
+        <origin xyz="0.028999999999999998 0.0128 -0.01019615" rpy="0.0 -0.0 0.0" />
+        <parent link="lidar-tilt-v2" />
+        <child link="LD06_LiDAR-v9" />
+    </joint>
+    <joint name="lidar-tilt-v2_Rigid-29" type="fixed">
+        <origin xyz="0.011999999999999997 0.041600000000000005 -0.024446150000000003" rpy="0.0 -0.0 0.0" />
+        <parent link="lidar-tilt-v2" />
+        <child link="standoff-cam-v1" />
+    </joint>
+    <joint name="standoff-cam-v1_Rigid-30" type="fixed">
+        <origin xyz="-0.0031484 0.013238979999999997 0.09012147" rpy="-1.5707963267948966 -0.0 6.488307254617384e-33" />
+        <parent link="standoff-cam-v1" />
+        <child link="Cam-V2.1-v1-v1" />
+    </joint>
+    <joint name="base_link-v5_Rigid-31" type="fixed">
+        <origin xyz="-0.018500003313425824 0.14012340512139657 0.002057138243784147" rpy="1.4311699866353467 1.9428902930940242e-16 -5.551115123125779e-17" />
+        <parent link="base_link-v5" />
+        <child link="distance-sensor-holder-v3" />
+    </joint>
+    <joint name="distance-sensor-holder-v3_Rigid-32" type="fixed">
+        <origin xyz="2.220446049250313e-18 -0.04599999975692981 -0.0029999983884258976" rpy="0.13962634015954983 1.1744639125552791e-32 1.650601385983596e-33" />
+        <parent link="distance-sensor-holder-v3" />
+        <child link="Sharp_IR-Sensor-v1" />
+    </joint>
+</robot>

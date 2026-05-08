@@ -4,3 +4,6 @@
 [submodule "src/wg_lidar"]
 	path = src/wg_lidar
 	url = https://github.com/ldrobotSensorTeam/ldlidar_ros2
+[submodule "src/wg_robot_localization"]
+	path = src/wg_robot_localization
+	url = https://github.com/automaticaddison/robot_localization

@@ -1,6 +1,9 @@
 from setuptools import find_packages, setup
+from glob import glob
 
 package_name = 'wg_navigation'
+
+#print(iglob("params/URDF/*"))
 
 setup(
     name=package_name,
@@ -12,7 +15,8 @@ setup(
         ('share/' + package_name, ['package.xml']),
         ('share/' + package_name + '/params', [  'params/nav2_params_wallg.yaml', 
                                                 'params/wall_g.urdf',
-                                                'params/rviz_config_wallg.rviz',])
+                                                'params/rviz_config_wallg.rviz',]),
+        ('share/' + package_name + '/URDF', glob("params/URDF/meshes/**/*", recursive=True)),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
