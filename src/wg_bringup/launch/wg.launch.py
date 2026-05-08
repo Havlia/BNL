@@ -17,12 +17,13 @@ def generate_launch_description():
     sim_pkg_path = FindPackageShare('simulation_package')
     gz_launch_path = PathJoinSubstitution([ros_gz_sim_pkg_path, 'launch', 'gz_sim.launch.py'])
     
-    wallg_urdf_path = os.path.join(get_package_share_directory('wg_navigation'), 'params', 'wall_g.urdf')
-    nav2_params = os.path.join(get_package_share_directory('wg_navigation'), 'params', 'nav2_params_wallg.yaml')
-
     nav2_launch_path = os.path.join(get_package_share_directory('nav2_bringup'), 'launch', 'bringup_launch.py')
+    nav2_rviz_path = os.path.join(get_package_share_directory('nav2_bringup'), 'launch', 'rviz_launch.py')
 
     explorer_config = os.path.join(get_package_share_directory("explore_lite"), "config", "params.yaml")
+    wallg_urdf_path = os.path.join(get_package_share_directory('wg_navigation'), 'params', 'wall_g.urdf')
+    nav2_params = os.path.join(get_package_share_directory('wg_navigation'), 'params', 'nav2_params_wallg.yaml')
+    rviz_config = os.path.join(get_package_share_directory('wg_navigation'), 'params', 'rviz_config_wallg.rviz')
 
     mode = LaunchConfiguration('mode')
 
@@ -104,6 +105,7 @@ def generate_launch_description():
             'use_sim_time': 'False',
             'autostart': 'True',
             'slam': 'True',
+            'rviz': 'True',
             'params_file': nav2_params,
         }.items(),
         condition=IfCondition(PythonExpression(["'", mode, "' == 'real'"])),
@@ -130,6 +132,16 @@ def generate_launch_description():
         remappings=[("/tf", "tf"), ("/tf_static", "tf_static")],
     )
 
+    nav2_rviz_node = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(nav2_rviz_path),
+        launch_arguments={
+            'namespace': '',
+            'use_sim_time': 'False',
+            'rviz_config': rviz_config,
+        }.items(),
+        condition=IfCondition(PythonExpression(["'", mode, "' == 'real'"])),
+    )
+
     gui_node = Node(
         package='wg_controller_gui',
         executable='controller_gui_exec',
@@ -145,7 +157,8 @@ def generate_launch_description():
                                             nav2_launch_node,
                                             explorer_node,
                                             robot_state_publisher,
-                                            wrapper_node,
+                                            nav2_rviz_node,
+                                            #wrapper_node,
                                             #picamera_node,
                                             gui_node])
 

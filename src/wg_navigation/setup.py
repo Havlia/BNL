@@ -11,7 +11,8 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         ('share/' + package_name + '/params', [  'params/nav2_params_wallg.yaml', 
-                                                'params/wall_g.urdf'])
+                                                'params/wall_g.urdf',
+                                                'params/rviz_config_wallg.rviz',])
     ],
     install_requires=['setuptools'],
     zip_safe=True,
