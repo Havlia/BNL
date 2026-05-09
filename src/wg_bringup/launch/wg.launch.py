@@ -73,7 +73,7 @@ def generate_launch_description():
 
     navigation_node = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(launch_dir, 'slam_launch.py')
+            os.path.join(launch_dir, 'Nav2_bringup.py')
         ),
         condition=IfCondition(PythonExpression(["'", mode, "' == 'real'"])),
         launch_arguments={
@@ -81,8 +81,9 @@ def generate_launch_description():
             'use_sim_time': 'false',
             'autostart': 'true',
             'use_respawn': 'false',
+            'rviz_config_file': os.path.join(get_package_share_directory('wg_navigation'), 'params', 'nav2_params_wallg.yaml')
         }.items(),
-    ),
+    )
 
     ldlidar_node = Node(
         package='ldlidar_ros2',
@@ -118,10 +119,11 @@ def generate_launch_description():
                                 actions=[   gz_start_node,
                                             bridge_node,
                                             ldlidar_node,
-                                            #nav2_rviz_node,
+                                            navigation_node,
                                             #wrapper_node,
                                             #picamera_node,
-                                            gui_node])
+                                            #gui_node,
+                                            ])
 
     return LaunchDescription([
         SetEnvironmentVariable(

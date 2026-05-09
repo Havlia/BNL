@@ -1,17 +1,3 @@
-# Copyright (c) 2018 Intel Corporation
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 import os
 
 from ament_index_python.packages import get_package_share_directory
@@ -42,14 +28,12 @@ def generate_launch_description():
     use_namespace = LaunchConfiguration('use_namespace')
     slam = LaunchConfiguration('slam')
     slam_params = LaunchConfiguration('slam_params')
-    map_yaml_file = LaunchConfiguration('map')
     use_sim_time = LaunchConfiguration('use_sim_time')
     params_file = LaunchConfiguration('params_file')
     autostart = LaunchConfiguration('autostart')
     use_composition = LaunchConfiguration('use_composition')
     use_respawn = LaunchConfiguration('use_respawn')
     log_level = LaunchConfiguration('log_level')
-    use_localization = LaunchConfiguration('use_localization')
     use_rviz= LaunchConfiguration('use_rviz')
     rviz_config_file = LaunchConfiguration('rviz_config_file')
 
@@ -121,13 +105,13 @@ def generate_launch_description():
 
     declare_params_file_cmd = DeclareLaunchArgument(
         'params_file',
-        default_value=os.path.join(bringup_dir, 'params', 'nav2_params.yaml'),
+        default_value=os.path.join(get_package_share_directory('wg_navigation'), 'params', 'nav2_params_wallg.yaml'),
         description='Full path to the ROS2 parameters file to use for all launched nodes',
     )
 
     declare_autostart_cmd = DeclareLaunchArgument(
         'autostart',
-        default_value='true',
+        default_value='True',
         description='Automatically startup the nav2 stack',
     )
 
@@ -139,7 +123,7 @@ def generate_launch_description():
 
     declare_use_rviz = DeclareLaunchArgument(
         'use_rviz',
-        default_value='true',
+        default_value='True',
         description='If we use Rviz or not.',
 
     )
