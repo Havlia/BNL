@@ -25,8 +25,6 @@ Panels:
     Name: Navigation 2
   - Class: nav2_rviz_plugins/Selector
     Name: Selector
-  - Class: nav2_rviz_plugins/Docking
-    Name: Docking
 Visualization Manager:
   Class: ""
   Displays:
@@ -46,7 +44,7 @@ Visualization Manager:
         Z: 0
       Plane: XY
       Plane Cell Count: 10
-      Reference Frame: <Fixed Frame>
+      Reference Frame: /base_link
       Value: true
     - Alpha: 1
       Class: rviz_default_plugins/RobotModel
@@ -111,8 +109,8 @@ Visualization Manager:
           Value: true
       Marker Scale: 1
       Name: TF
-      Show Arrows: true
-      Show Axes: true
+      Show Arrows: false
+      Show Axes: false
       Show Names: false
       Tree:
         {}
