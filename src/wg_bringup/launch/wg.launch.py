@@ -152,7 +152,7 @@ def generate_launch_description():
     
     diff_drive_spawner = Node(
         package='controller_manager',
-        executable='spawner.py',
+        executable='spawner',
         arguments=['joint_group_velocity_controller'],
     )
 
@@ -165,7 +165,7 @@ def generate_launch_description():
 
     joint_broad_spawner = Node(
         package='controller_manager',
-        executable='spawner.py',
+        executable='spawner',
         arguments=['joint_state_broadcaster']
     )
 
@@ -185,7 +185,7 @@ def generate_launch_description():
     )
 
     wait_nav2_node = RegisterEventHandler(
-                        OnProcessStart( target_action=delayed_joint_spawner,
+                        OnProcessStart( target_action=joint_broad_spawner,
                                         on_start=[navigation_node]))
     
     wait_sec_node = TimerAction(period=2.0,
