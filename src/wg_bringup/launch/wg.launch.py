@@ -151,7 +151,7 @@ def generate_launch_description():
                                             bridge_node,
                                             ldlidar_node,
                                             robot_state_publisher_node,
-                                            wait_nav2_node,
+                                            #wait_nav2_node,
                                             #wrapper_node,
                                             #picamera_node,
                                             #gui_node,
