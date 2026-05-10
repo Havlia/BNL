@@ -11,7 +11,6 @@ controller_manager:
 
 joint_group_velocity_controller:
   ros__parameters:
-    joints:
-      joints: 
-        - "left_wheel_joint"
-        - "right_wheel_joint"
+    joints: 
+      - "left_wheel_joint"
+      - "right_wheel_joint"
