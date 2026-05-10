@@ -34,8 +34,6 @@ def generate_launch_description():
     use_composition = LaunchConfiguration('use_composition')
     use_respawn = LaunchConfiguration('use_respawn')
     log_level = LaunchConfiguration('log_level')
-    use_rviz= LaunchConfiguration('use_rviz')
-    rviz_config_file = LaunchConfiguration('rviz_config_file')
 
     # Map fully qualified names to relative ones so the node's namespace can be prepended.
     # In case of the transforms (tf), currently, there doesn't seem to be a better alternative
@@ -121,19 +119,6 @@ def generate_launch_description():
         description='Whether to use composed bringup',
     )
 
-    declare_use_rviz = DeclareLaunchArgument(
-        'use_rviz',
-        default_value='True',
-        description='If we use Rviz or not.',
-
-    )
-
-    declare_rviz_config = DeclareLaunchArgument(
-        'rviz_params_file',
-        default_value=os.path.join(get_package_share_directory('wg_navigation'), 'params', 'rviz_config_wallg.rviz'),
-        description='The config path'
-    )
-
     declare_use_respawn_cmd = DeclareLaunchArgument(
         'use_respawn',
         default_value='False',
@@ -171,19 +156,7 @@ def generate_launch_description():
                     'slam_params': slam_params,
                 }.items(),
             ),
-            IncludeLaunchDescription(
-                PythonLaunchDescriptionSource(
-                    os.path.join(launch_dir, 'rviz_launch.py')
-                ),
-                condition=IfCondition(PythonExpression([use_rviz])),
-                launch_arguments={
-                    'namespace': namespace,
-                    'use_sim_time': use_sim_time,
-                    'use_rviz': use_rviz,
-                    'rviz_config_file': rviz_config_file,
-                    'autostart': autostart,
-                }.items(),
-            ),
+
             IncludeLaunchDescription(
                 PythonLaunchDescriptionSource(
                     os.path.join(launch_dir, 'navigation_launch.py')
@@ -220,8 +193,6 @@ def generate_launch_description():
     ld.add_action(declare_use_respawn_cmd)
     ld.add_action(declare_log_level_cmd)
     ld.add_action(declare_use_localization_cmd)
-    ld.add_action(declare_use_rviz)
-    ld.add_action(declare_rviz_config)
 
     # Add the actions to launch all of the navigation nodes
     ld.add_action(bringup_cmd_group)

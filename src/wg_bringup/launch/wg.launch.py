@@ -17,6 +17,8 @@ def generate_launch_description():
     sim_pkg_path = FindPackageShare('simulation_package')
     gz_launch_path = PathJoinSubstitution([ros_gz_sim_pkg_path, 'launch', 'gz_sim.launch.py'])
 
+    wallg_urdf = os.path.join(get_package_share_directory('wg_navigation'),'URDF', 'URDF_ASSEMBLY.urdf')
+
     launch_dir = os.path.join(get_package_share_directory('wg_bringup'), 'launch')
 
     mode = LaunchConfiguration('mode')
@@ -85,6 +87,33 @@ def generate_launch_description():
         }.items(),
     )
 
+    navigation_node = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(launch_dir, 'Nav2_bringup.py')
+        ),
+        condition=IfCondition(PythonExpression(["'", mode, "' == 'real'"])),
+        launch_arguments={
+            'namespace': '',
+            'use_sim_time': 'false',
+            'autostart': 'true',
+            'use_respawn': 'false',
+            'rviz_config_file': os.path.join(get_package_share_directory('wg_navigation'), 'params', 'nav2_params_wallg.yaml')
+        }.items(),
+    )
+
+    with open(wallg_urdf, 'r') as infp:
+        robot_desc = infp.read()
+
+    robot_state_publisher_node = Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        name='robot_state_publisher',
+        output='screen',
+        parameters=[{
+            'robot_description': robot_desc
+        }]
+    )
+
     ldlidar_node = Node(
         package='ldlidar_ros2',
         executable='ldlidar_ros2_node',
@@ -104,8 +133,7 @@ def generate_launch_description():
             {'range_min': 0.02}, # unit is meter
             {'range_max': 12.0}   # unit is meter
       ]
-  )
-
+    )
 
     gui_node = Node(
         package='wg_controller_gui',
@@ -115,15 +143,20 @@ def generate_launch_description():
         condition=IfCondition(PythonExpression(["'", mode, "' == 'real'"])),
     )
 
+    wait_nav2_node = TimerAction(period=2.0,
+                                 actions=[navigation_node])
+    
     wait_sec_node = TimerAction(period=2.0,
                                 actions=[   gz_start_node,
                                             bridge_node,
                                             ldlidar_node,
-                                            navigation_node,
+                                            robot_state_publisher_node,
+                                            wait_nav2_node,
                                             #wrapper_node,
                                             #picamera_node,
                                             #gui_node,
                                             ])
+
 
     return LaunchDescription([
         SetEnvironmentVariable(
@@ -145,5 +178,6 @@ def generate_launch_description():
                 target_action=startup_node,
                 on_exit=[wait_sec_node]
             )
-        )
+        ),
+
     ])
