@@ -5,7 +5,7 @@ from launch.substitutions import Command, LaunchConfiguration, PythonExpression
 from launch.conditions import IfCondition
 from launch_ros.actions import Node
 from launch.actions import SetEnvironmentVariable, IncludeLaunchDescription, TimerAction, RegisterEventHandler, DeclareLaunchArgument
-from launch.event_handlers import OnProcessExit
+from launch.event_handlers import OnProcessExit, OnProcessStart
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
@@ -157,7 +157,7 @@ def generate_launch_description():
     )
 
     delayed_diff_spawner = RegisterEventHandler(
-                            OnProcessExit(
+                            OnProcessStart(
                                 target_action=ros2_control_manager,
                                 on_start=[diff_drive_spawner],
                             )
@@ -170,9 +170,9 @@ def generate_launch_description():
     )
 
     delayed_joint_spawner = RegisterEventHandler(
-                            OnProcessExit(
+                            OnProcessStart(
                                 target_action=ros2_control_manager,
-                                on_start=[joint_broad_spawner],
+                                on_startW=[joint_broad_spawner],
                             )
     )
 
@@ -184,8 +184,9 @@ def generate_launch_description():
         condition=IfCondition(PythonExpression(["'", mode, "' == 'real'"])),
     )
 
-    wait_nav2_node = TimerAction(period=2.0,
-                                 actions=[navigation_node])
+    wait_nav2_node = RegisterEventHandler(
+                        OnProcessStart( target_action=delayed_joint_spawner,
+                                        actions=[navigation_node]))
     
     wait_sec_node = TimerAction(period=2.0,
                                 actions=[   gz_start_node,
