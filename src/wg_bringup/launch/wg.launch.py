@@ -148,7 +148,7 @@ def generate_launch_description():
     ros2_control_manager = Node(
         package='controller_manager',
         executable='ros2_control_node',
-        name='ros2_control',
+        name='controller_manager',
         parameters=[{
             'robot_description': robot_desc}, config_controller,
                     ],
