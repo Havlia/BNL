@@ -315,6 +315,9 @@
             </geometry>
         </collision>
     </link>
+
+    <link name="base_laser"/>
+
     <link name="LD06_LiDAR-v9">
         <inertial>
             <origin xyz="-0.0032573327950152497 0.006749989770242544 0.10540105482539719" rpy="0.0 -0.0 0.0" />
@@ -424,6 +427,11 @@
         <parent link="base_link"/>
         <child link="base_footprint"/>
     </joint>
+    <joint name="base_laser" type="fixed">
+        <origin xyz="0 0 0.025"/>
+        <parent link="base_link"/>
+        <child link="LD06_LiDAR-v9"/>
+    <joint/>
     <joint name="base_link-v5_Rigid-1" type="fixed">
         <origin xyz="-0.08400000331342582 -0.038666664878603596 0.013227668243784171" rpy="-5.551115123125779e-17 -1.5707963267948961 0" />
         <parent link="chassis_link" />
