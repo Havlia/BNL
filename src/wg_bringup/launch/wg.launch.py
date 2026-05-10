@@ -141,9 +141,8 @@ def generate_launch_description():
         executable='ros2_control_node',
         name='ros2_control',
         parameters=[{
-            'robot_description': robot_desc,
-            'param_file': config_controller,
-            }],
+            'robot_description': robot_desc}, config_controller,
+                    ],
         output='screen',
     )
 
