@@ -4,6 +4,7 @@ from launch.actions import DeclareLaunchArgument
 from launch.substitutions import Command, LaunchConfiguration, PythonExpression
 from launch.conditions import IfCondition
 from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterFile
 from launch.actions import SetEnvironmentVariable, IncludeLaunchDescription, TimerAction, RegisterEventHandler, DeclareLaunchArgument
 from launch.event_handlers import OnProcessExit, OnProcessStart
 from launch.launch_description_sources import PythonLaunchDescriptionSource
@@ -17,7 +18,15 @@ def generate_launch_description():
     sim_pkg_path = FindPackageShare('simulation_package')
     gz_launch_path = PathJoinSubstitution([ros_gz_sim_pkg_path, 'launch', 'gz_sim.launch.py'])
 
-    config_controller = os.path.join(get_package_share_directory('wg_navigation'), 'params', 'controller_manager.yaml')
+
+    config_controller = ParameterFile(
+        os.path.join(
+            get_package_share_directory('wg_navigation'),
+            'params',
+            'controller_manager.yaml'
+        ),
+        allow_substs=True
+    )
     wallg_urdf = os.path.join(get_package_share_directory('wg_navigation'),'URDF', 'URDF_ASSEMBLY.urdf')
 
     launch_dir = os.path.join(get_package_share_directory('wg_bringup'), 'launch')
@@ -155,12 +164,10 @@ def generate_launch_description():
         arguments=['joint_group_velocity_controller'],
     )
 
-    delayed_diff_spawners_final = TimerAction(period=7.0,actions=[diff_drive_spawner])
-
     delayed_diff_spawner = RegisterEventHandler(
                             OnProcessStart(
                                 target_action=ros2_control_manager,
-                                on_start=[delayed_diff_spawners_final],
+                                on_start=[diff_drive_spawner],
                             )
     )
 
@@ -170,14 +177,10 @@ def generate_launch_description():
         arguments=['joint_state_broadcaster']
     )
 
-
-    delayed_joint_spawners_final = TimerAction(period=7.0,actions=[diff_drive_spawner])
-
-
     delayed_joint_spawner = RegisterEventHandler(
                             OnProcessStart(
                                 target_action=ros2_control_manager,
-                                on_start=[delayed_joint_spawners_final],
+                                on_start=[joint_broad_spawner],
                             )
     )
 
