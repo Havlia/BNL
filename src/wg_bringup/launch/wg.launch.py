@@ -142,7 +142,7 @@ def generate_launch_description():
         name='ros2_control',
         parameters=[{
             'robot_description': robot_desc,
-            'params_file': config_controller,
+            'param_file': config_controller,
             }],
         output='screen',
     )
