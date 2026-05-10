@@ -186,7 +186,7 @@ def generate_launch_description():
 
     wait_nav2_node = RegisterEventHandler(
                         OnProcessStart( target_action=delayed_joint_spawner,
-                                        actions=[navigation_node]))
+                                        on_start=[navigation_node]))
     
     wait_sec_node = TimerAction(period=2.0,
                                 actions=[   gz_start_node,
