@@ -155,10 +155,12 @@ def generate_launch_description():
         arguments=['joint_group_velocity_controller'],
     )
 
+    delayed_diff_spawners_final = TimerAction(period=7.0,actions=[diff_drive_spawner])
+
     delayed_diff_spawner = RegisterEventHandler(
                             OnProcessStart(
                                 target_action=ros2_control_manager,
-                                on_start=[diff_drive_spawner],
+                                on_start=[delayed_diff_spawners_final],
                             )
     )
 
@@ -168,10 +170,14 @@ def generate_launch_description():
         arguments=['joint_state_broadcaster']
     )
 
+
+    delayed_joint_spawners_final = TimerAction(period=7.0,actions=[diff_drive_spawner])
+
+
     delayed_joint_spawner = RegisterEventHandler(
                             OnProcessStart(
                                 target_action=ros2_control_manager,
-                                on_start=[joint_broad_spawner],
+                                on_start=[delayed_diff_spawners_final],
                             )
     )
 
