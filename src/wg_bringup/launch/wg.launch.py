@@ -17,6 +17,7 @@ def generate_launch_description():
     sim_pkg_path = FindPackageShare('simulation_package')
     gz_launch_path = PathJoinSubstitution([ros_gz_sim_pkg_path, 'launch', 'gz_sim.launch.py'])
 
+    config_controller = os.path.join(get_package_share_directory('wg_navigation'), 'params', 'controller_manager.yaml')
     wallg_urdf = os.path.join(get_package_share_directory('wg_navigation'),'URDF', 'URDF_ASSEMBLY.urdf')
 
     launch_dir = os.path.join(get_package_share_directory('wg_bringup'), 'launch')
@@ -135,6 +136,46 @@ def generate_launch_description():
       ]
     )
 
+    ros2_control_manager = Node(
+        package='controller_manager',
+        executable='ros2_control_node',
+        name='ros2_control',
+        parameters=[{
+            'robot_description': robot_desc,
+            'params_file': config_controller,
+            }],
+        output='screen',
+    )
+
+    delayed_controller = TimerAction(period=3.0,
+                                     actions=[ros2_control_manager])
+    
+    diff_drive_spawner = Node(
+        package='controller_manager',
+        executable='spawner.py',
+        arguments=['joint_group_velocity_controller'],
+    )
+
+    delayed_diff_spawner = RegisterEventHandler(
+                            OnProcessExit(
+                                target_action=ros2_control_manager,
+                                on_start=[diff_drive_spawner],
+                            )
+    )
+
+    joint_broad_spawner = Node(
+        package='controller_manager',
+        executable='spawner.py',
+        arguments=['joint_state_broadcaster']
+    )
+
+    delayed_joint_spawner = RegisterEventHandler(
+                            OnProcessExit(
+                                target_action=ros2_control_manager,
+                                on_start=[joint_broad_spawner],
+                            )
+    )
+
     gui_node = Node(
         package='wg_controller_gui',
         executable='controller_gui_exec',
@@ -151,6 +192,9 @@ def generate_launch_description():
                                             bridge_node,
                                             ldlidar_node,
                                             robot_state_publisher_node,
+                                            delayed_controller,
+                                            delayed_diff_spawner,
+                                            delayed_joint_spawner,
                                             #wait_nav2_node,
                                             #wrapper_node,
                                             #picamera_node,

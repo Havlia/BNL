@@ -4,6 +4,6 @@
 [submodule "src/wg_lidar"]
 	path = src/wg_lidar
 	url = https://github.com/ldrobotSensorTeam/ldlidar_ros2
-[submodule "src/wg_robot_localization"]
-	path = src/wg_robot_localization
-	url = https://github.com/automaticaddison/robot_localization
+[submodule "src/wg_pca9685_hw_interface"]
+	path = src/wg_pca9685_hw_interface
+	url = https://github.com/rosblox/pca9685_ros2_control
