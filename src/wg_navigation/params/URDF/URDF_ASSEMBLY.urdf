@@ -86,7 +86,7 @@
             </geometry>
         </collision>
     </link>
-    <link name="drivewheel-right">
+    <link name="drivewheel_right">
         <inertial>
             <origin xyz="-3.9728215384116084e-10 0.00012849862764078513 0.011091461161683754" rpy="-3.038581678643136e-64 -0.0 0.0" />
             <mass value="0.2722552771680154" />
@@ -450,7 +450,7 @@
     <joint name="right_wheel_joint" type="continuous">
         <origin xyz="0.0 2.220446049250313e-18 -0.0062999999999999905" rpy="3.141592653589793 -0.0 0.0" />
         <parent link="beltestrammer-wide-BB-right-v2" />
-        <child link="drivewheel-right" />
+        <child link="drivewheel_right" />
         <axis xyz="-6.162975822039155e-33 2.1005126272699612e-48 0.9999999999999999" />
     </joint>
     <joint name="left_wheel_joint" type="continuous">
@@ -548,11 +548,13 @@
         <joint name="left_wheel_joint">
             <command_interface name="velocity"/>
             <state_interface name="velocity"/>
+            <state_interface name="position"/>
         </joint>
         
         <joint name="right_wheel_joint">
             <command_interface name="velocity"/>
             <state_interface name="velocity"/>
+            <state_interface name="position"/>
         </joint>
     </ros2_control>
 
