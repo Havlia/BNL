@@ -172,7 +172,7 @@ def generate_launch_description():
     delayed_joint_spawner = RegisterEventHandler(
                             OnProcessStart(
                                 target_action=ros2_control_manager,
-                                on_startW=[joint_broad_spawner],
+                                on_start=[joint_broad_spawner],
                             )
     )
 
