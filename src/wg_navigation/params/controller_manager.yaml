@@ -17,5 +17,5 @@ joint_group_velocity_controller:
     wheel_separation: 0.225
     wheel_radius: 0.0025
 
-    publish_rate: 50
+    publish_rate: 50.0
     use_stamped_vel: false
