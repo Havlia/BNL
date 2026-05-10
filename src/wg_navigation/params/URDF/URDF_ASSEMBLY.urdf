@@ -447,13 +447,13 @@
         <parent link="chassis_link" />
         <child link="beltestrammer-wide-BB-right-v2" />
     </joint>
-    <joint name="beltestrammer-wide-BB-right-v2_Revolute-3" type="continuous">
+    <joint name="right_wheel_joint" type="continuous">
         <origin xyz="0.0 2.220446049250313e-18 -0.0062999999999999905" rpy="3.141592653589793 -0.0 0.0" />
         <parent link="beltestrammer-wide-BB-right-v2" />
         <child link="drivewheel-right" />
         <axis xyz="-6.162975822039155e-33 2.1005126272699612e-48 0.9999999999999999" />
     </joint>
-    <joint name="beltestrammer-wide-BB-left-v6_Revolute-4" type="continuous">
+    <joint name="left_wheel_joint" type="continuous">
         <origin xyz="0.0 2.220446049250313e-18 0.006300000000000008" rpy="3.141592653589793 -0.0 0.0" />
         <parent link="beltestrammer-wide-BB-left-v6" />
         <child link="drivewheel_left" />
