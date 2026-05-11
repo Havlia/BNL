@@ -23,6 +23,8 @@
     <material name="aluminium">
         <color rgba="0.52 0.515 0.51 1"/>
     </material>
+    
+    <link name="base_link"/>
 
     <link name="base_footprint"/>
 
@@ -312,8 +314,6 @@
             </geometry>
         </collision>
     </link>
-
-    <link name="base_laser"/>
 
     <link name="LD06_LiDAR-v9">
         <inertial>
