@@ -161,7 +161,7 @@ def generate_launch_description():
     diff_drive_spawner = Node(
         package='controller_manager',
         executable='spawner',
-        arguments=['joint_group_velocity_controller'],
+        arguments=['diff_drive_controller'],
     )
 
     delayed_diff_spawner = RegisterEventHandler(
@@ -201,9 +201,9 @@ def generate_launch_description():
                                             bridge_node,
                                             ldlidar_node,
                                             robot_state_publisher_node,
-                                            delayed_controller,
-                                            delayed_diff_spawner,
-                                            delayed_joint_spawner,
+                                            #delayed_controller,
+                                            #delayed_diff_spawner,
+                                            #delayed_joint_spawner,
                                             #wait_nav2_node,
                                             #wrapper_node,
                                             #picamera_node,
