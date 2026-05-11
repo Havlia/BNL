@@ -23,8 +23,6 @@
     <material name="aluminium">
         <color rgba="0.52 0.515 0.51 1"/>
     </material>
-    
-    <link name="base_link"/>
 
     <link name="base_footprint"/>
 
