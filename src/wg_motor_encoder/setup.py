@@ -24,6 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'wg_encoder_exec = wg_motor_encoder.wg_encoder:main'
         ],
     },
 )
