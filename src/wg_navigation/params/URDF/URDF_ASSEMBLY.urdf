@@ -537,23 +537,36 @@
         <child link="Sharp_IR-Sensor-v1" />
     </joint>
 
-    <ros2_control name="pca9685_ros2" type="system">
-        <hardware>
-            <plugin>pca9685_hardware_interface/Pca9685SystemHardware</plugin>
-            <!--<param name="i2c_address">0x40</param>/!-->
-            <!--<param name="frequency">200</param>/!-->
-        </hardware>
+<ros2_control name="Pca9685System" type="system">
 
+  <hardware>
+    <plugin>pca9685_hardware_interface/Pca9685SystemHardware</plugin>
 
-        <joint name="left_wheel_joint">
-            <command_interface name="velocity"/>
-            <state_interface name="velocity"/>
-        </joint>
-        
-        <joint name="right_wheel_joint">
-            <command_interface name="velocity"/>
-            <state_interface name="velocity"/>
-        </joint>
-    </ros2_control>
+    <param name="ticks_per_rev">700</param>
+    <param name="wheel_radius">0.025</param>
+
+    <param name="max_velocity">10.0</param>
+
+    <param name="left_ina_pin">4</param>
+    <param name="left_inb_pin">17</param>
+
+    <param name="right_ina_pin">27</param>
+    <param name="right_inb_pin">22</param>
+
+  </hardware>
+
+  <joint name="left_wheel_joint">
+    <command_interface name="velocity"/>
+    <state_interface name="position"/>
+    <state_interface name="velocity"/>
+  </joint>
+
+  <joint name="right_wheel_joint">
+    <command_interface name="velocity"/>
+    <state_interface name="position"/>
+    <state_interface name="velocity"/>
+  </joint>
+
+</ros2_control>
 
 </robot>

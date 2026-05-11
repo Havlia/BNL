@@ -6,4 +6,4 @@
 	url = https://github.com/ldrobotSensorTeam/ldlidar_ros2
 [submodule "src/wg_pca9685_hw_interface"]
 	path = src/wg_pca9685_hw_interface
-	url = https://github.com/rosblox/pca9685_ros2_control
+	url = https://github.com/Havlia/pca9685_ros2_control
