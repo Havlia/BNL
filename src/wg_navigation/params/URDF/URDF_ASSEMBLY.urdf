@@ -426,17 +426,6 @@
         <parent link="base_link"/>
         <child link="base_footprint"/>
     </joint>
-    <joint name="base_link_to_base_laser" type="fixed">
-        <origin xyz="0 0 0.025"/>
-        <parent link="base_link"/>
-        <child link="base_laser"/>
-    </joint>
-
-    <joint name="base_laser_to_lidar" type="fixed">
-        <origin xyz="0 0 0"/>
-        <parent link="base_laser"/>
-        <child link="LD06_LiDAR-v9"/>
-    </joint>
     <joint name="base_link-v5_Rigid-1" type="fixed">
         <origin xyz="-0.08400000331342582 -0.038666664878603596 0.013227668243784171" rpy="-5.551115123125779e-17 -1.5707963267948961 0" />
         <parent link="chassis_link" />
@@ -514,7 +503,7 @@
     <joint name="lidar-tilt-v2_Rigid-25" type="fixed">
         <origin xyz="0.028999999999999998 0.0128 -0.01019615" rpy="0.0 -0.0 0.0" />
         <parent link="lidar-tilt-v2" />
-        <child link="LD06_LiDAR-v9" />
+        <child link="LD06_LiDAR-v9"/>
     </joint>
     <joint name="lidar-tilt-v2_Rigid-29" type="fixed">
         <origin xyz="0.011999999999999997 0.041600000000000005 -0.024446150000000003" rpy="0.0 -0.0 0.0" />
